@@ -19,23 +19,25 @@ import com.finalProject.RubikSolver.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_2, R.string.tab_text_1};
     private final Context mContext;
+    private FragmentSolve solveTab;
+    private FragmentInstruction instructionTab;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+        solveTab = new FragmentSolve();
+        instructionTab = new FragmentInstruction();
     }
 
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         switch (position) {
-            case 0:
-                FragmentSolve solveTab = new FragmentSolve();
-                return solveTab;
             case 1:
-                FragmentInstruction instructionTab = new FragmentInstruction();
+                return solveTab;
+            case 0:
                 return instructionTab;
         }
         return null;
