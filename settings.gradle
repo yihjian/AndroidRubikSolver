@@ -1,2 +1,2 @@
-include ':app', ':min2phase'
+include ':app'
 rootProject.name='My Application'
