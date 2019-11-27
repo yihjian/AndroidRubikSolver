@@ -2,4 +2,9 @@
     <string name="app_name">Android Rubik Solver</string>
     <string name="tab_text_1">Solve</string>
     <string name="tab_text_2">Instruction</string>
+    <string name="clear">Clear</string>
+    <string name="solve">Solve</string>
+    <string name="solutionAlgorithm">Solution Algorithm:</string>
+    <string name="dismiss">Back</string>
+    <string name="seeAnimation">Animation</string>
 </resources>
