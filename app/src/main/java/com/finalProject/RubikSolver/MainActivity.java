@@ -4,9 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,18 +17,18 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.finalProject.RubikSolver.ui.main.SectionsPagerAdapter;
-
-import java.util.Arrays;
 import com.finalProject.RubikSolver.min2phase.Search;
 import com.finalProject.RubikSolver.min2phase.Tools;
+import com.finalProject.RubikSolver.ui.main.SectionsPagerAdapter;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     /** Solving fragment that handles all solving actions. */
     private Fragment solveTab;
+
+    /** The arrayList that stores image view. */
+    private HashMap<Character, ImageView> imageViewMap = new HashMap<>();
+
+    private File tempFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,20 +106,33 @@ public class MainActivity extends AppCompatActivity {
      * @param fragment: the solving fragment tab.
      */
     private void handleSolvingAction(Fragment fragment) {
-        // Left over testing code
-        //TextView a = fragment.getView().findViewById(R.id.solveTest);
         //Log.d("textbox is ", a.getText().toString());
 
         Button solve = fragment.getView().findViewById(R.id.solve);
         Button clear = fragment.getView().findViewById(R.id.clear);
 
+        //Add each imageView to HashMap. Then use a for loop to setup onclickListener.
+        imageViewMap.put('u', fragment.getView().findViewById(R.id.uIv));
+        imageViewMap.put('f', fragment.getView().findViewById(R.id.fIv));
+        imageViewMap.put('d', fragment.getView().findViewById(R.id.dIv));
+        imageViewMap.put('l', fragment.getView().findViewById(R.id.lIv));
+        imageViewMap.put('r', fragment.getView().findViewById(R.id.rIv));
+        imageViewMap.put('b', fragment.getView().findViewById(R.id.bIv));
+        for(Map.Entry<Character, ImageView> entry : imageViewMap.entrySet()) {
+            entry.getValue().setOnClickListener(unused -> imageClicked(entry.getKey()));
+        }
+
+
         clear.setOnClickListener(unused -> clearInput());
         solve.setOnClickListener(unused -> solveClicked());
+
+
     }
 
     /**
      * This function is called when "solving is clicked"
      * Pops out an alert dialog that shows the result.
+     * Min2Phase algorithm referenced from https://github.com/cs0x7f/min2phase.
      */
     private void solveClicked() {
         Log.d("clicking solved ", "Solving");
@@ -154,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         solution.setText(result);
         Log.d("Result", result);
 
+        // First hard-code URL-base for final animation.
+        // Use for loop to append algorithm
         String urlBase = "https://alg.cubing.net/?";
         String setUp = "setup=";
         String algorithm = "%0A&alg=";
@@ -202,4 +225,61 @@ public class MainActivity extends AppCompatActivity {
     private void clearInput() {
         Log.d("Clearing input clicked: ", "not doing anything yet");
     }
+
+    private void imageClicked(Character position) {
+        char[] temp = new char[6];
+        switch (position) {
+            case 'u':
+                temp = u;
+                break;
+            case 'f':
+                temp = f;
+                break;
+            case 'd':
+                temp = d;
+                break;
+            case 'l':
+                temp = l;
+                break;
+            case 'r':
+                temp = r;
+                break;
+            case 'b':
+                temp = b;
+                break;
+            default:
+                Log.d("Bad input from image onclickListener", Character.toString(position));
+        }
+
+        /*
+        Arrays.fill(temp, 't');
+        Log.d("u is", Arrays.toString(u));
+        Log.d("d is", Arrays.toString(d));
+        */
+        //takePic();
+    }
+
+
+//    private void takePic() {
+//        AndPermission.with(this).runtime()
+//                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
+//                .onGranted(
+//                        tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath() + "/" + getPackageName() + "/temp"), System.currentTimeMillis() + ".jpg");
+//                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if (intent.resolveActivity(getPackageManager()) != null) {
+//                    /*
+//                     * 指定拍照存储路径
+//                     * 7.0 及其以上使用FileProvider替换'file://'访问
+//                     */
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                        //这里的BuildConfig，需要是程序包下BuildConfig。
+//                        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", tempFile));
+//                        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                    } else {
+//                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+//                    }
+//                    startActivityForResult(intent, REQUEST_CAPTURE);
+//                }
+//        }).start();
+//    }
 }
