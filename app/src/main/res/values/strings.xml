@@ -7,4 +7,7 @@
     <string name="solutionAlgorithm">Solution Algorithm:</string>
     <string name="dismiss">Back</string>
     <string name="seeAnimation">Animation</string>
+    <string name="zoom">Move and Zoom</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
 </resources>
