@@ -4,17 +4,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +29,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.finalProject.RubikSolver.min2phase.Search;
 import com.finalProject.RubikSolver.min2phase.Tools;
 import com.finalProject.RubikSolver.ui.main.SectionsPagerAdapter;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.runtime.Permission;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -76,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
     /** The arrayList that stores image view. */
     private HashMap<Character, ImageView> imageViewMap = new HashMap<>();
 
-    /**Temp image file for taking photos. */
-    private File tempFile;
-
+    /** Temp file path of the picture taken. */
     private String path;
 
 
@@ -303,42 +294,11 @@ public class MainActivity extends AppCompatActivity {
         takePic();
     }
 
-
-    /*
-    Functions below are integrated from https://github.com/yihjian/MagicCube
-    along with the image clipping activities. It includes codes that adapt older versions
-    We can most likely improve them. But I don't have enough time and I'm too lazy to read docs.
-     */
-
     /**
      * The function that handles picture taking.
      * Save a temp pic file.
      */
     private void takePic() {
-//        AndPermission.with(this).runtime()
-//                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
-//                .onGranted(unused -> {
-//                    tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath()
-//                            + "/" + getPackageName() + "/temp"), System.currentTimeMillis() + ".jpg");
-//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    if (intent.resolveActivity(getPackageManager()) != null) {
-//                        // Specify saving dir
-//                        // !TODO There's probably a easier way. But I'm too lazy to read to docs.
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                            Log.d("current version", Integer.toString(Build.VERSION.SDK_INT));
-//                            Log.d("uri is", Uri.fromFile(tempFile).toString());
-//                            intent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                                    FileProvider.getUriForFile(this,
-//                                            BuildConfig.APPLICATION_ID + ".provider", tempFile));
-//                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                        } else {
-//                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-//                        }
-//                        startActivityForResult(intent, REQUEST_CAPTURE);
-//                        Log.d("taking pic", " did we got to here?");
-//                    }
-//                }).start();
-
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePic.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
@@ -376,24 +336,6 @@ public class MainActivity extends AppCompatActivity {
         return image;
     }
 
-
-    /**
-     * Check if the photo can be saved at a specific dir.
-     * @param dirPath: the intended dir.
-     * @return passed in dir or created dir.
-     */
-    private static String checkDirPath(String dirPath) {
-        if (TextUtils.isEmpty(dirPath)) {
-            return "";
-        }
-        File dir = new File(dirPath);
-        // Create new directories.
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        return dirPath;
-    }
-
     /**
      * This function calls the camera api or reads the file.
      * @param requestCode: calling camera action or reading file.
@@ -404,25 +346,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_CAPTURE) { //requesting camera.
-            Log.d("requesting capture, ", "???");
             if (resultCode == RESULT_OK) {
-                Log.d("bad result", " maybe??");
-                // If we have camera, go to camera page.
-                // Similar to create dir, use if statement to check versions.
-                // !TODO Probably there's a better way, again I'm lazy so I copy and paste.
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(),
-//                            BuildConfig.APPLICATION_ID + ".provider", tempFile);
-//                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri));
-//                } else {
-//                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(tempFile)));
-//                }
-//                Log.d("sending uri to crop image ", Uri.fromFile(tempFile).toString());
                 clipPic(Uri.parse(path));
             } else {
-                Toast.makeText(this, "bad result code" + resultCode, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Camera cancelled ", Toast.LENGTH_LONG).show();
             }
-        } else if (requestCode == REQUEST_CROP_PHOTO){  //剪切图片返回
+        } else if (requestCode == REQUEST_CROP_PHOTO){  //when receive cropped image
             Log.d("cropping", "???");
             if (resultCode == RESULT_OK) {
                 final Uri uri = intent.getData();
@@ -433,17 +362,22 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
                 Log.d("Current selected position ", Character.toString(position));
                 imageViewMap.get(position).setImageBitmap(bitMap);
-//                bitmapMap.put(position, bitMap);
 //                getColor();
             }
         }
     }
 
+    /*
+    The clipping activities are integrated from https://github.com/yihjian/MagicCube.
+    I hasn't gone through them yet. Seems to be working until someone found bugs.
+     */
+
+
     private void clipPic(Uri uri) {
         if (uri == null) {
             Toast.makeText(this, "Could not load picture", Toast.LENGTH_LONG).show();
         }
-        Log.d("sending intent to handle pic ", uri.toString());
+//        Log.d("sending intent to handle pic ", uri.toString());
         Intent intent = new Intent();
         intent.setClass(this, ClipImageActivity.class);
         intent.setData(uri);
