@@ -1,7 +1,14 @@
 package com.finalProject.RubikSolver;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,8 +37,12 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -38,7 +50,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAPTURE = 233;
-
+    private static final int REQUEST_CROP_PHOTO = 998;
+    private char position;
     /** Char arrays that stores the color of each face.
      *  !!!!!!!!!!!!!!!!!!!!!!!
      *  Use lowercase char for color.
@@ -65,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**Temp image file for taking photos. */
     private File tempFile;
+
+    private String path;
 
 
     @Override
@@ -247,28 +262,34 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when user tabs specific block to take picture of cube.
      *  Should take photo - read color - and update stored color in array.
-     * @param position : a char that takes the position of user's tab.
+     * @param p : a char that takes the position of user's tab.
      */
-    private void imageClicked(Character position) {
+    private void imageClicked(Character p) {
         char[] temp = new char[6];
-        switch (position) {
+        switch (p) {
             case 'u':
                 temp = u;
+                position = 'u';
                 break;
             case 'f':
                 temp = f;
+                position = 'f';
                 break;
             case 'd':
                 temp = d;
+                position = 'd';
                 break;
             case 'l':
                 temp = l;
+                position = 'l';
                 break;
             case 'r':
                 temp = r;
+                position = 'r';
                 break;
             case 'b':
                 temp = b;
+                position = 'b';
                 break;
             default:
                 Log.d("Bad input from image onclickListener", Character.toString(position));
@@ -282,32 +303,79 @@ public class MainActivity extends AppCompatActivity {
         takePic();
     }
 
+
+    /*
+    Functions below are integrated from https://github.com/yihjian/MagicCube
+    along with the image clipping activities. It includes codes that adapt older versions
+    We can most likely improve them. But I don't have enough time and I'm too lazy to read docs.
+     */
+
     /**
      * The function that handles picture taking.
-     * Uses https://github.com/yanzhenjie/AndPermission for permission control.
-     * Save a temp pic file. See acknowledgement for details.
+     * Save a temp pic file.
      */
     private void takePic() {
-        AndPermission.with(this).runtime()
-                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
-                .onGranted(unused -> {
-                    tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath()
-                            + "/" + getPackageName() + "/temp"), System.currentTimeMillis() + ".jpg");
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (intent.resolveActivity(getPackageManager()) != null) {
-                        // Specify saving dir
-                        // If statement used to handle different android version.
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                    FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", tempFile));
-                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                        } else {
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-                        }
-                        startActivityForResult(intent, REQUEST_CAPTURE);
-                    }
-                }).start();
+//        AndPermission.with(this).runtime()
+//                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
+//                .onGranted(unused -> {
+//                    tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath()
+//                            + "/" + getPackageName() + "/temp"), System.currentTimeMillis() + ".jpg");
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    if (intent.resolveActivity(getPackageManager()) != null) {
+//                        // Specify saving dir
+//                        // !TODO There's probably a easier way. But I'm too lazy to read to docs.
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                            Log.d("current version", Integer.toString(Build.VERSION.SDK_INT));
+//                            Log.d("uri is", Uri.fromFile(tempFile).toString());
+//                            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                                    FileProvider.getUriForFile(this,
+//                                            BuildConfig.APPLICATION_ID + ".provider", tempFile));
+//                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                        } else {
+//                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+//                        }
+//                        startActivityForResult(intent, REQUEST_CAPTURE);
+//                        Log.d("taking pic", " did we got to here?");
+//                    }
+//                }).start();
+
+        Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePic.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Log.d("fuck ", ex.getMessage());
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.finalProject.RubikSolver.provider",
+                        photoFile);
+                takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePic, REQUEST_CAPTURE);
+            }
+        }
     }
+
+    /**
+     * This function creates a temp file that stores the taken image.
+     * Also stores a path for later use. Taken from Google tutorial.
+     * @return a File that represent the temporary position of photo.
+     * @throws IOException if we cannot make files, throw an IO exception.
+     */
+    private File createImageFile() throws IOException {
+        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String name = "JPEG_" + time + "_";
+        File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                name,
+                ".jpg",
+                dir
+                );
+        path = image.getAbsolutePath();
+        return image;
+    }
+
 
     /**
      * Check if the photo can be saved at a specific dir.
@@ -336,31 +404,73 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_CAPTURE) { //requesting camera.
+            Log.d("requesting capture, ", "???");
             if (resultCode == RESULT_OK) {
+                Log.d("bad result", " maybe??");
                 // If we have camera, go to camera page.
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", tempFile);
-                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri));
-                } else {
-                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(tempFile)));
+                // Similar to create dir, use if statement to check versions.
+                // !TODO Probably there's a better way, again I'm lazy so I copy and paste.
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(),
+//                            BuildConfig.APPLICATION_ID + ".provider", tempFile);
+//                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri));
+//                } else {
+//                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(tempFile)));
+//                }
+//                Log.d("sending uri to crop image ", Uri.fromFile(tempFile).toString());
+                clipPic(Uri.parse(path));
+            } else {
+                Toast.makeText(this, "bad result code" + resultCode, Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQUEST_CROP_PHOTO){  //剪切图片返回
+            Log.d("cropping", "???");
+            if (resultCode == RESULT_OK) {
+                final Uri uri = intent.getData();
+                if (uri == null) {
+                    return;
                 }
-                //gotoClipActivity(Uri.fromFile(tempFile));
+                String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
+                Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
+                Log.d("Current selected position ", Character.toString(position));
+                imageViewMap.get(position).setImageBitmap(bitMap);
+//                bitmapMap.put(position, bitMap);
+//                getColor();
             }
         }
-//            case REQUEST_CROP_PHOTO:  //剪切图片返回
-//                if (resultCode == RESULT_OK) {
-//                    final Uri uri = intent.getData();
-//                    if (uri == null) {
-//                        return;
-//                    }
-//                    String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
-//                    Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
-//
-//                    imageViewList.get(position).setImageBitmap(bitMap);
-//                    bitmapMap.put(position, bitMap);
-//                    getColor();
-//                }
-//                break;
-//        }
     }
+
+    private void clipPic(Uri uri) {
+        if (uri == null) {
+            Toast.makeText(this, "Could not load picture", Toast.LENGTH_LONG).show();
+        }
+        Log.d("sending intent to handle pic ", uri.toString());
+        Intent intent = new Intent();
+        intent.setClass(this, ClipImageActivity.class);
+        intent.setData(uri);
+        startActivityForResult(intent, REQUEST_CROP_PHOTO);
+    }
+
+    public static String getRealFilePathFromUri(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+
 }
