@@ -206,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"
                 android:textStyle="bold|italic"
-                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as blue, o as orange, and g as Green)"/>
+                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as Blue, o as Orange, and g as Green)"/>
 
         </LinearLayout>
         <LinearLayout
