@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -465,65 +466,119 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Declaring views for showing the output result.
-    TextView u1 = findViewById(R.id.U1);
-    TextView u2 = findViewById(R.id.U2);
-    TextView u3 = findViewById(R.id.U3);
-    TextView u4 = findViewById(R.id.U4);
-    TextView u5 = findViewById(R.id.U5);
-    TextView u6 = findViewById(R.id.U6);
-    TextView u7 = findViewById(R.id.U7);
-    TextView u8 = findViewById(R.id.U8);
-    TextView u9 = findViewById(R.id.U9);
+    @BindView(R.id.U1)
+    TextView u1;
+    @BindView(R.id.U2)
+    TextView u2;
+    @BindView(R.id.U3)
+    TextView u3;
+    @BindView(R.id.U4)
+    TextView u4;
+    @BindView(R.id.U5)
+    TextView u5;
+    @BindView(R.id.U6)
+    TextView u6;
+    @BindView(R.id.U7)
+    TextView u7;
+    @BindView(R.id.U8)
+    TextView u8;
+    @BindView(R.id.U9)
+    TextView u9;
 
-    TextView f1 = findViewById(R.id.F1);
-    TextView f2 = findViewById(R.id.F2);
-    TextView f3 = findViewById(R.id.F3);
-    TextView f4 = findViewById(R.id.F4);
-    TextView f5 = findViewById(R.id.F5);
-    TextView f6 = findViewById(R.id.F6);
-    TextView f7 = findViewById(R.id.F7);
-    TextView f8 = findViewById(R.id.F8);
-    TextView f9 = findViewById(R.id.F9);
+    @BindView(R.id.F1)
+    TextView f1;
+    @BindView(R.id.F2)
+    TextView f2;
+    @BindView(R.id.F3)
+    TextView f3;
+    @BindView(R.id.F4)
+    TextView f4;
+    @BindView(R.id.F5)
+    TextView f5;
+    @BindView(R.id.F6)
+    TextView f6;
+    @BindView(R.id.F7)
+    TextView f7;
+    @BindView(R.id.F8)
+    TextView f8;
+    @BindView(R.id.F9)
+    TextView f9;
 
-    TextView d1 = findViewById(R.id.D1);
-    TextView d2 = findViewById(R.id.D2);
-    TextView d3 = findViewById(R.id.D3);
-    TextView d4 = findViewById(R.id.D4);
-    TextView d5 = findViewById(R.id.D5);
-    TextView d6 = findViewById(R.id.D6);
-    TextView d7 = findViewById(R.id.D7);
-    TextView d8 = findViewById(R.id.D8);
-    TextView d9 = findViewById(R.id.D9);
+    @BindView(R.id.D1)
+    TextView d1;
+    @BindView(R.id.D2)
+    TextView d2;
+    @BindView(R.id.D3)
+    TextView d3;
+    @BindView(R.id.D4)
+    TextView d4;
+    @BindView(R.id.D5)
+    TextView d5;
+    @BindView(R.id.D6)
+    TextView d6;
+    @BindView(R.id.D7)
+    TextView d7;
+    @BindView(R.id.D8)
+    TextView d8;
+    @BindView(R.id.D9)
+    TextView d9;
 
-    TextView l1 = findViewById(R.id.L1);
-    TextView l2 = findViewById(R.id.L2);
-    TextView l3 = findViewById(R.id.L3);
-    TextView l4 = findViewById(R.id.L4);
-    TextView l5 = findViewById(R.id.L5);
-    TextView l6 = findViewById(R.id.L6);
-    TextView l7 = findViewById(R.id.L7);
-    TextView l8 = findViewById(R.id.L8);
-    TextView l9 = findViewById(R.id.L9);
+    @BindView(R.id.L1)
+    TextView l1;
+    @BindView(R.id.L2)
+    TextView l2;
+    @BindView(R.id.L3)
+    TextView l3;
+    @BindView(R.id.L4)
+    TextView l4;
+    @BindView(R.id.L5)
+    TextView l5;
+    @BindView(R.id.L6)
+    TextView l6;
+    @BindView(R.id.L7)
+    TextView l7;
+    @BindView(R.id.L8)
+    TextView l8;
+    @BindView(R.id.L9)
+    TextView l9;
 
-    TextView r1 = findViewById(R.id.R1);
-    TextView r2 = findViewById(R.id.R2);
-    TextView r3 = findViewById(R.id.R3);
-    TextView r4 = findViewById(R.id.R4);
-    TextView r5 = findViewById(R.id.R5);
-    TextView r6 = findViewById(R.id.R6);
-    TextView r7 = findViewById(R.id.R7);
-    TextView r8 = findViewById(R.id.R8);
-    TextView r9 = findViewById(R.id.R9);
+    @BindView(R.id.R1)
+    TextView r1;
+    @BindView(R.id.R2)
+    TextView r2;
+    @BindView(R.id.R3)
+    TextView r3;
+    @BindView(R.id.R4)
+    TextView r4;
+    @BindView(R.id.R5)
+    TextView r5;
+    @BindView(R.id.R6)
+    TextView r6;
+    @BindView(R.id.R7)
+    TextView r7;
+    @BindView(R.id.R8)
+    TextView r8;
+    @BindView(R.id.R9)
+    TextView r9;
 
-    TextView b1 = findViewById(R.id.B1);
-    TextView b2 = findViewById(R.id.B2);
-    TextView b3 = findViewById(R.id.B3);
-    TextView b4 = findViewById(R.id.B4);
-    TextView b5 = findViewById(R.id.B5);
-    TextView b6 = findViewById(R.id.B6);
-    TextView b7 = findViewById(R.id.B7);
-    TextView b8 = findViewById(R.id.B8);
-    TextView b9 = findViewById(R.id.B9);
+    @BindView(R.id.B1)
+    TextView b1;
+    @BindView(R.id.B2)
+    TextView b2;
+    @BindView(R.id.B3)
+    TextView b3;
+    @BindView(R.id.B4)
+    TextView b4;
+    @BindView(R.id.B5)
+    TextView b5;
+    @BindView(R.id.B6)
+    TextView b6;
+    @BindView(R.id.B7)
+    TextView b7;
+    @BindView(R.id.B8)
+    TextView b8;
+    @BindView(R.id.B9)
+    TextView b9;
 
     public void addView() {
         textViewList.add(u1);
