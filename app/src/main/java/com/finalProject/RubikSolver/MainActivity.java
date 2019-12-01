@@ -29,6 +29,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.finalProject.RubikSolver.min2phase.Search;
 import com.finalProject.RubikSolver.min2phase.Tools;
 import com.finalProject.RubikSolver.ui.main.SectionsPagerAdapter;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
 import java.io.File;
 import java.io.IOException;
@@ -299,22 +301,25 @@ public class MainActivity extends AppCompatActivity {
      * Save a temp pic file.
      */
     private void takePic() {
-        Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePic.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                Log.d("fuck ", ex.getMessage());
-            }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.finalProject.RubikSolver.provider",
-                        photoFile);
-                takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePic, REQUEST_CAPTURE);
-            }
-        }
+        AndPermission.with(this).runtime()
+                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
+                .onGranted(unused -> {
+                    Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePic.resolveActivity(getPackageManager()) != null) {
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            Log.d("fuck ", ex.getMessage());
+                        }
+                        if (photoFile != null) {
+                            Uri photoURI = FileProvider.getUriForFile(this,
+                                    "com.finalProject.RubikSolver.provider", photoFile);
+                            takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            startActivityForResult(takePic, REQUEST_CAPTURE);
+                        }
+                    }
+                }).start();
     }
 
     /**
