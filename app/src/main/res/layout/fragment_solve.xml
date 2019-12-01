@@ -56,7 +56,8 @@
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <FrameLayout
                 android:id="@+id/lLay"
@@ -195,8 +196,466 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:textStyle="bold|italic"
+                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as blue, o as orange, and g as Green)"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/U1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U1]" />
+
+            <TextView
+                android:id="@+id/U2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U2]" />
+
+            <TextView
+                android:id="@+id/U3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U3]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/U4"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U4]" />
+
+            <TextView
+                android:id="@+id/U5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U5]" />
+
+            <TextView
+                android:id="@+id/U6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U6]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/U7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U7]" />
+
+            <TextView
+                android:id="@+id/U8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U8]" />
+
+            <TextView
+                android:id="@+id/U9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[U9]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/L1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L1]" />
+
+            <TextView
+                android:id="@+id/L2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L2]" />
+
+            <TextView
+                android:id="@+id/L3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L3]" />
+
+            <TextView
+                android:id="@+id/F1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F1]" />
+            <TextView
+                android:id="@+id/F2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F2]" />
+            <TextView
+                android:id="@+id/F3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F3]" />
+
+            <TextView
+                android:id="@+id/R1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R1]" />
+            <TextView
+                android:id="@+id/R2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R2]" />
+            <TextView
+                android:id="@+id/R3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R3]" />
+
+            <TextView
+                android:id="@+id/B1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B1]" />
+            <TextView
+                android:id="@+id/B2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B2]" />
+            <TextView
+                android:id="@+id/B3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B3]" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/L4"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L4]" />
+
+            <TextView
+                android:id="@+id/L5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L5]" />
+
+            <TextView
+                android:id="@+id/L6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L5]" />
+
+            <TextView
+                android:id="@+id/F4"
+                android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:text="[F4]" />
+            <TextView
+                android:id="@+id/F5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F5]" />
+            <TextView
+                android:id="@+id/F6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F6]" />
+
+            <TextView
+                android:id="@+id/R4"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R4]" />
+            <TextView
+                android:id="@+id/R5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R5]" />
+            <TextView
+                android:id="@+id/R6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R6]" />
+
+            <TextView
+                android:id="@+id/B4"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B4]" />
+            <TextView
+                android:id="@+id/B5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B5]" />
+            <TextView
+                android:id="@+id/B6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B6]" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/L7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L7]" />
+
+            <TextView
+                android:id="@+id/L8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L8]" />
+
+            <TextView
+                android:id="@+id/L9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[L9]" />
+            <TextView
+                android:id="@+id/F7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F7]" />
+            <TextView
+                android:id="@+id/F8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F8]" />
+            <TextView
+                android:id="@+id/F9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[F9]" />
+
+            <TextView
+                android:id="@+id/R7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R7]" />
+            <TextView
+                android:id="@+id/R8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R8]" />
+            <TextView
+                android:id="@+id/R9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[R9]" />
+
+            <TextView
+                android:id="@+id/B7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B7]" />
+            <TextView
+                android:id="@+id/B8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B8]" />
+            <TextView
+                android:id="@+id/B9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[B9]" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/D1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D1]" />
+            <TextView
+                android:id="@+id/D2"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D2]" />
+            <TextView
+                android:id="@+id/D3"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D3]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/D4"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D4]" />
+            <TextView
+                android:id="@+id/D5"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D5]" />
+            <TextView
+                android:id="@+id/D6"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D6]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/D7"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D7]" />
+            <TextView
+                android:id="@+id/D8"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D8]" />
+            <TextView
+                android:id="@+id/D9"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="[D9]" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <Button
@@ -205,6 +664,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/cardview_dark_background"
+                android:textColor="@color/colorAccent"
                 android:text="@string/clear" />
 
             <Button
@@ -213,10 +674,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/cardview_dark_background"
+                android:textColor="@color/colorAccent"
                 android:text="@string/solve" />
 
         </LinearLayout>
 
     </LinearLayout>
+
 
 </LinearLayout>
