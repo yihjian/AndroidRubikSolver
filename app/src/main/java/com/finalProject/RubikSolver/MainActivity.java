@@ -461,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
                     p = bitmap.getPixel(width * 5 / 6, height * 5 / 6);
                     break;
             }
-            textViewList.get(position * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
+            textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
         }
     }
 
