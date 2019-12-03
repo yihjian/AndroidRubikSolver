@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
                 temp = l;
                 centerPosition = 1;
                 position = 'l';
+                System.out.println("Arrived here");
                 break;
             case 'r':
                 temp = r;
@@ -327,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
      * Save a temp pic file.
      */
     private void takePic() {
+        System.out.println("Arrived here at takePic");
         AndPermission.with(this).runtime()
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
                 .onGranted(unused -> {
