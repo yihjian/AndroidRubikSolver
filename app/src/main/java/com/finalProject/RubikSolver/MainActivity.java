@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
      *  o for orange
      *  !!!!!!!!!!!!!!!!!!!!!!
      */
+    char[] temp = new char[6];
     private char[] u = new char[9];
     private char[] f = new char[9];
     private char[] d = new char[9];
@@ -106,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
         // This doesn't work for some reason. Should be the same logic as the listener.
 //        try {
-//            solveTab = sectionsPagerAdapter.getItem(0);
+//            solveTab = sectionsPagerAdapter.getItem(1);
 //            Log.d("fragment", solveTab.toString());
 //            View a = solveTab.getView();
 //            Log.d("fragment", a.toString());
+//            handleSolvingAction(solveTab);
 //        } catch (NullPointerException e) {
 //            Log.d("nullpointer", "Strange null pointer case");
 //        }
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 int position = tab.getPosition();
                 if (position == 1) {
                     solveTab = sectionsPagerAdapter.getItem(position);
+                    Log.d("in handle ", solveTab.toString());
                     handleSolvingAction(solveTab);
                 }
             }
@@ -268,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearInput() {
         Log.d("Clearing input clicked: ", "not doing anything yet");
+        recreate();
     }
 
     /** Called when user tabs specific block to take picture of cube.
@@ -275,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
      * @param p : a char that takes the position of user's tab.
      */
     private void imageClicked(Character p) {
-        char[] temp = new char[6];
         switch (p) {
             case 'u':
                 temp = u;
@@ -475,6 +478,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(centerPosition * 9 + i);
             if (textViewList.get(centerPosition * 9 + i) != null) {
                 textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
+                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(1);
             }
         }
     }
