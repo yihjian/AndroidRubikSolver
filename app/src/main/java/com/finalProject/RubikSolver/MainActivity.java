@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         r = new char[]{'w', 'w', 'g', 'b', 'r', 'g', 'y', 'y', 'g'};
         b = new char[]{'w', 'w', 'r', 'r', 'b', 'o', 'y', 'y', 'r'};
 
-        // Convert traditional RGB chars to to UBL definition used by min2phase
+        // Convert traditional RGB chars to to UBL definition used by min2phase*/
         String rgbCube = new String(u) + new String(r) + new String(f) + new String(d) + new String(l) + new String(b);
         Log.d("cube before switching: ", rgbCube);
         rgbCube = rgbCube.replace(u[4], 'U');
@@ -207,10 +207,10 @@ public class MainActivity extends AppCompatActivity {
         rgbCube = rgbCube.replace(l[4], 'L');
         rgbCube = rgbCube.replace(b[4], 'B');
         Log.d("Cube after switching: ", rgbCube);
-        */
+
 
         //String rgbCube = "DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL";
-        String rgbCube = Tools.randomCube();
+        //String rgbCube = Tools.randomCube();
         //Test: solution.setText("F D F' U R' L' F D' U R D' F' D2 R U2");
         //Test: Log.d("Conversion from min2phase package is: ", Tools.fromScramble("F U' F2 D' B U R' F' L D' R' U' L U B' D2 R' F U2 D2"));
         //Use min2phase to search for solution.

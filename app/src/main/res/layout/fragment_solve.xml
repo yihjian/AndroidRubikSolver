@@ -73,12 +73,6 @@
                     android:layout_gravity="center"
                     android:text="L" />
 
-                <ImageView
-                    android:id="@+id/lIv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
 
             </FrameLayout>
 
@@ -90,6 +84,12 @@
                 android:layout_weight="1"
                 android:background="@drawable/grid"
                 android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/lIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:layout_width="wrap_content"
