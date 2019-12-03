@@ -73,12 +73,6 @@
                     android:layout_gravity="center"
                     android:text="L" />
 
-                <ImageView
-                    android:id="@+id/lIv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
 
             </FrameLayout>
 
@@ -90,6 +84,12 @@
                 android:layout_weight="1"
                 android:background="@drawable/grid"
                 android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/lIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"
                 android:textStyle="bold|italic"
-                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as blue, o as orange, and g as Green)"/>
+                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as Blue, o as Orange, and g as Green)"/>
 
         </LinearLayout>
         <LinearLayout
@@ -491,10 +491,11 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:text="[L9]" />
+
             <TextView
                 android:id="@+id/F7"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:text="[F7]" />
             <TextView
                 android:id="@+id/F8"

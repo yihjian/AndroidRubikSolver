@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,11 +36,16 @@ import com.yanzhenjie.permission.runtime.Permission;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,13 +64,17 @@ public class MainActivity extends AppCompatActivity {
      *  o for orange
      *  !!!!!!!!!!!!!!!!!!!!!!
      */
+    char[] temp = new char[6];
     private char[] u = new char[9];
     private char[] f = new char[9];
     private char[] d = new char[9];
     private char[] l = new char[9];
     private char[] r = new char[9];
     private char[] b = new char[9];
-
+    private List<TextView> textViewList = new ArrayList<>(54);
+    private Map<Integer, Bitmap> bitmapMap = new HashMap<>(6);
+    private int centerPosition = 0;
+    protected Unbinder unbinder;
     /** Solving fragment that handles all solving actions. */
     private Fragment solveTab;
 
@@ -78,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Initialize the two tab layout.
         setContentView(R.layout.activity_main);
+        //unbinder = ButterKnife.bind(this);
         final SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -97,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
         // This doesn't work for some reason. Should be the same logic as the listener.
 //        try {
-//            solveTab = sectionsPagerAdapter.getItem(0);
+//            solveTab = sectionsPagerAdapter.getItem(1);
 //            Log.d("fragment", solveTab.toString());
 //            View a = solveTab.getView();
 //            Log.d("fragment", a.toString());
+//            handleSolvingAction(solveTab);
 //        } catch (NullPointerException e) {
 //            Log.d("nullpointer", "Strange null pointer case");
 //        }
@@ -113,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 int position = tab.getPosition();
                 if (position == 1) {
                     solveTab = sectionsPagerAdapter.getItem(position);
+                    Log.d("in handle ", solveTab.toString());
                     handleSolvingAction(solveTab);
                 }
             }
@@ -126,6 +138,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*@Override
+    protected void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
+    }*/
 
     /**
      * This function handles the solving activity.
@@ -145,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
         imageViewMap.put('l', fragment.getView().findViewById(R.id.lIv));
         imageViewMap.put('r', fragment.getView().findViewById(R.id.rIv));
         imageViewMap.put('b', fragment.getView().findViewById(R.id.bIv));
+        initializeView(fragment);
+        addView();
         for(Map.Entry<Character, ImageView> entry : imageViewMap.entrySet()) {
             entry.getValue().setOnClickListener(unused -> imageClicked(entry.getKey()));
         }
@@ -180,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         r = new char[]{'w', 'w', 'g', 'b', 'r', 'g', 'y', 'y', 'g'};
         b = new char[]{'w', 'w', 'r', 'r', 'b', 'o', 'y', 'y', 'r'};
 
-        // Convert traditional RGB chars to to UBL definition used by min2phase
+        // Convert traditional RGB chars to to UBL definition used by min2phase*/
         String rgbCube = new String(u) + new String(r) + new String(f) + new String(d) + new String(l) + new String(b);
         Log.d("cube before switching: ", rgbCube);
         rgbCube = rgbCube.replace(u[4], 'U');
@@ -190,10 +210,10 @@ public class MainActivity extends AppCompatActivity {
         rgbCube = rgbCube.replace(l[4], 'L');
         rgbCube = rgbCube.replace(b[4], 'B');
         Log.d("Cube after switching: ", rgbCube);
-        */
+
 
         //String rgbCube = "DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL";
-        String rgbCube = Tools.randomCube();
+        //String rgbCube = Tools.randomCube();
         //Test: solution.setText("F D F' U R' L' F D' U R D' F' D2 R U2");
         //Test: Log.d("Conversion from min2phase package is: ", Tools.fromScramble("F U' F2 D' B U R' F' L D' R' U' L U B' D2 R' F U2 D2"));
         //Use min2phase to search for solution.
@@ -251,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearInput() {
         Log.d("Clearing input clicked: ", "not doing anything yet");
+        recreate();
     }
 
     /** Called when user tabs specific block to take picture of cube.
@@ -258,30 +279,35 @@ public class MainActivity extends AppCompatActivity {
      * @param p : a char that takes the position of user's tab.
      */
     private void imageClicked(Character p) {
-        char[] temp = new char[6];
         switch (p) {
             case 'u':
                 temp = u;
+                centerPosition = 0;
                 position = 'u';
                 break;
             case 'f':
                 temp = f;
+                centerPosition = 2;
                 position = 'f';
                 break;
             case 'd':
                 temp = d;
+                centerPosition = 5;
                 position = 'd';
                 break;
             case 'l':
                 temp = l;
+                centerPosition = 1;
                 position = 'l';
                 break;
             case 'r':
                 temp = r;
+                centerPosition = 3;
                 position = 'r';
                 break;
             case 'b':
                 temp = b;
+                centerPosition = 4;
                 position = 'b';
                 break;
             default:
@@ -367,7 +393,8 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
                 Log.d("Current selected position ", Character.toString(position));
                 imageViewMap.get(position).setImageBitmap(bitMap);
-//                getColor();
+                bitmapMap.put(centerPosition, bitMap);
+                getColor();
             }
         }
     }
@@ -410,6 +437,287 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return data;
+    }
+
+
+    private synchronized void getColor() {
+        Bitmap bitmap = bitmapMap.get(centerPosition);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int p = 0;
+        for (int i = 0; i < 9; i++) {
+            switch (i) {
+                case 0:
+                    p = bitmap.getPixel(width / 6, height / 6);
+                    break;
+                case 1:
+                    p = bitmap.getPixel(width / 2, height / 6);
+                    break;
+                case 2:
+                    p = bitmap.getPixel(width * 5 / 6, height / 6);
+                    break;
+                case 3:
+                    p = bitmap.getPixel(width / 6, height / 2);
+                    break;
+                case 4:
+                    p = bitmap.getPixel(width / 2, height / 2);
+                    break;
+                case 5:
+                    p = bitmap.getPixel(width * 5 / 6, height / 2);
+                    break;
+                case 6:
+                    p = bitmap.getPixel(width / 6, height * 5 / 6);
+                    break;
+                case 7:
+                    p = bitmap.getPixel(width / 2, height * 5 / 6);
+                    break;
+                case 8:
+                    p = bitmap.getPixel(width * 5 / 6, height * 5 / 6);
+                    break;
+            }
+            System.out.println(centerPosition * 9 + i);
+            if (textViewList.get(centerPosition * 9 + i) != null) {
+                textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
+                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(1);
+            }
+        }
+    }
+
+    //Declaring views for showing the output result.
+
+    TextView u1;
+    TextView u2;
+
+    TextView u3;
+    //@BindView(R.id.U4)
+    TextView u4;
+    //@BindView(R.id.U5)
+    TextView u5;
+    //@BindView(R.id.U6)
+    TextView u6;
+    //@BindView(R.id.U7)
+    TextView u7;
+    //@BindView(R.id.U8)
+    TextView u8;
+    //@BindView(R.id.U9)
+    TextView u9;
+
+    //@BindView(R.id.F1)
+    TextView f1;
+    //@BindView(R.id.F2)
+    TextView f2;
+    //@BindView(R.id.F3)
+    TextView f3;
+    //@BindView(R.id.F4)
+    TextView f4;
+    //@BindView(R.id.F5)
+    TextView f5;
+    //@BindView(R.id.F6)
+    TextView f6;
+    //@BindView(R.id.F7)
+    TextView f7;
+    //@BindView(R.id.F8)
+    TextView f8;
+    //@BindView(R.id.F9)
+    TextView f9;
+
+    //@BindView(R.id.D1)
+    TextView d1;
+    //@BindView(R.id.D2)
+    TextView d2;
+    //@BindView(R.id.D3)
+    TextView d3;
+    //@BindView(R.id.D4)
+    TextView d4;
+    //@BindView(R.id.D5)
+    TextView d5;
+    //@BindView(R.id.D6)
+    TextView d6;
+    //@BindView(R.id.D7)
+    TextView d7;
+    //@BindView(R.id.D8)
+    TextView d8;
+    //@BindView(R.id.D9)
+    TextView d9;
+
+    //@BindView(R.id.L1)
+    TextView l1;
+    //@BindView(R.id.L2)
+    TextView l2;
+    //@BindView(R.id.L3)
+    TextView l3;
+    //@BindView(R.id.L4)
+    TextView l4;
+    //@BindView(R.id.L5)
+    TextView l5;
+    //@BindView(R.id.L6)
+    TextView l6;
+    //@BindView(R.id.L7)
+    TextView l7;
+    //@BindView(R.id.L8)
+    TextView l8;
+    //@BindView(R.id.L9)
+    TextView l9;
+
+    //@BindView(R.id.R1)
+    TextView r1;
+    //@BindView(R.id.R2)
+    TextView r2;
+    //@BindView(R.id.R3)
+    TextView r3;
+    //@BindView(R.id.R4)
+    TextView r4;
+    //@BindView(R.id.R5)
+    TextView r5;
+    //@BindView(R.id.R6)
+    TextView r6;
+    //@BindView(R.id.R7)
+    TextView r7;
+    //@BindView(R.id.R8)
+    TextView r8;
+    //@BindView(R.id.R9)
+    TextView r9;
+
+    //@BindView(R.id.B1)
+    TextView b1;
+    //@BindView(R.id.B2)
+    TextView b2;
+    //@BindView(R.id.B3)
+    TextView b3;
+    //@BindView(R.id.B4)
+    TextView b4;
+    //@BindView(R.id.B5)
+    TextView b5;
+    //@BindView(R.id.B6)
+    TextView b6;
+    //@BindView(R.id.B7)
+    TextView b7;
+    //@BindView(R.id.B8)
+    TextView b8;
+    //@BindView(R.id.B9)
+    TextView b9;
+
+    public void initializeView(Fragment fragment) {
+        u1 = fragment.getView().findViewById(R.id.U1);
+        u2 = fragment.getView().findViewById(R.id.U2);
+        u3 = fragment.getView().findViewById(R.id.U3);
+        u4 = fragment.getView().findViewById(R.id.U4);
+        u5 = fragment.getView().findViewById(R.id.U5);
+        u6 = fragment.getView().findViewById(R.id.U6);
+        u7 = fragment.getView().findViewById(R.id.U7);
+        u8 = fragment.getView().findViewById(R.id.U8);
+        u9 = fragment.getView().findViewById(R.id.U9);
+
+        f1 = fragment.getView().findViewById(R.id.F1);
+        f2 = fragment.getView().findViewById(R.id.F2);
+        f3 = fragment.getView().findViewById(R.id.F3);
+        f4 = fragment.getView().findViewById(R.id.F4);
+        f5 = fragment.getView().findViewById(R.id.F5);
+        f6 = fragment.getView().findViewById(R.id.F6);
+        f7 = fragment.getView().findViewById(R.id.F7);
+        f8 = fragment.getView().findViewById(R.id.F8);
+        f9 = fragment.getView().findViewById(R.id.F9);
+
+        d1 = fragment.getView().findViewById(R.id.D1);
+        d2 = fragment.getView().findViewById(R.id.D2);
+        d3 = fragment.getView().findViewById(R.id.D3);
+        d4 = fragment.getView().findViewById(R.id.D4);
+        d5 = fragment.getView().findViewById(R.id.D5);
+        d6 = fragment.getView().findViewById(R.id.D6);
+        d7 = fragment.getView().findViewById(R.id.D7);
+        d8 = fragment.getView().findViewById(R.id.D8);
+        d9 = fragment.getView().findViewById(R.id.D9);
+
+        l1 = fragment.getView().findViewById(R.id.L1);
+        l2 = fragment.getView().findViewById(R.id.L2);
+        l3 = fragment.getView().findViewById(R.id.L3);
+        l4 = fragment.getView().findViewById(R.id.L4);
+        l5 = fragment.getView().findViewById(R.id.L5);
+        l6 = fragment.getView().findViewById(R.id.L6);
+        l7 = fragment.getView().findViewById(R.id.L7);
+        l8 = fragment.getView().findViewById(R.id.L8);
+        l9 = fragment.getView().findViewById(R.id.L9);
+
+        r1 = fragment.getView().findViewById(R.id.R1);
+        r2 = fragment.getView().findViewById(R.id.R2);
+        r3 = fragment.getView().findViewById(R.id.R3);
+        r4 = fragment.getView().findViewById(R.id.R4);
+        r5 = fragment.getView().findViewById(R.id.R5);
+        r6 = fragment.getView().findViewById(R.id.R6);
+        r7 = fragment.getView().findViewById(R.id.R7);
+        r8 = fragment.getView().findViewById(R.id.R8);
+        r9 = fragment.getView().findViewById(R.id.R9);
+
+        b1 = fragment.getView().findViewById(R.id.B1);
+        b2 = fragment.getView().findViewById(R.id.B2);
+        b3 = fragment.getView().findViewById(R.id.B3);
+        b4 = fragment.getView().findViewById(R.id.B4);
+        b5 = fragment.getView().findViewById(R.id.B5);
+        b6 = fragment.getView().findViewById(R.id.B6);
+        b7 = fragment.getView().findViewById(R.id.B7);
+        b8 = fragment.getView().findViewById(R.id.B8);
+        b9 = fragment.getView().findViewById(R.id.B9);
+    }
+    public void addView() {
+        textViewList.add(u1);
+        textViewList.add(u2);
+        textViewList.add(u3);
+        textViewList.add(u4);
+        textViewList.add(u5);
+        textViewList.add(u6);
+        textViewList.add(u7);
+        textViewList.add(u8);
+        textViewList.add(u9);
+
+        textViewList.add(l1);
+        textViewList.add(l2);
+        textViewList.add(l3);
+        textViewList.add(l4);
+        textViewList.add(l5);
+        textViewList.add(l6);
+        textViewList.add(l7);
+        textViewList.add(l8);
+        textViewList.add(l9);
+
+        textViewList.add(f1);
+        textViewList.add(f2);
+        textViewList.add(f3);
+        textViewList.add(f4);
+        textViewList.add(f5);
+        textViewList.add(f6);
+        textViewList.add(f7);
+        textViewList.add(f8);
+        textViewList.add(f9);
+
+        textViewList.add(r1);
+        textViewList.add(r2);
+        textViewList.add(r3);
+        textViewList.add(r4);
+        textViewList.add(r5);
+        textViewList.add(r6);
+        textViewList.add(r7);
+        textViewList.add(r8);
+        textViewList.add(r9);
+
+        textViewList.add(b1);
+        textViewList.add(b2);
+        textViewList.add(b3);
+        textViewList.add(b4);
+        textViewList.add(b5);
+        textViewList.add(b6);
+        textViewList.add(b7);
+        textViewList.add(b8);
+        textViewList.add(b9);
+
+        textViewList.add(d1);
+        textViewList.add(d2);
+        textViewList.add(d3);
+        textViewList.add(d4);
+        textViewList.add(d5);
+        textViewList.add(d6);
+        textViewList.add(d7);
+        textViewList.add(d8);
+        textViewList.add(d9);
     }
 
 }
