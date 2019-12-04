@@ -67,17 +67,17 @@
                 android:background="@drawable/grid"
                 android:clickable="true">
 
-                <ImageView
-                    android:id="@+id/lIv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="L" />
+
+                <ImageView
+                    android:id="@+id/lIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
 
 
             </FrameLayout>
@@ -494,7 +494,7 @@
 
             <TextView
                 android:id="@+id/F7"
-                android:layout_width="wrap_content"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:text="[F7]" />
             <TextView
