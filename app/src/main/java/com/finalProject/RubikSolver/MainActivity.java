@@ -526,7 +526,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(centerPosition * 9 + i);
             if (textViewList.get(centerPosition * 9 + i) != null) {
                 textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
-                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(1);
+                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(0);
             }
         }
     }

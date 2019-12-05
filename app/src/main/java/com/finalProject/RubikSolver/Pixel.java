@@ -30,20 +30,20 @@ public class Pixel implements Serializable {
         if (p.Red > 120) {
             if (p.Green > 160) {
                 if (p.Blue > 150) {
-                    this.Color = "[w]";
+                    this.Color = "w";
                 } else {
-                    this.Color = "[y]";
+                    this.Color = "y";
                 }
             } else if (p.Green > 50) {
-                this.Color = "[o]";
+                this.Color = "o";
             } else {
-                this.Color = "[r]";
+                this.Color = "r";
             }
         } else {
             if (p.Green > p.Blue) {
-                this.Color = "[g]";
+                this.Color = "g";
             } else {
-                this.Color = "[b]";
+                this.Color = "b";
             }
         }
     }
