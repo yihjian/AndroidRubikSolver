@@ -12,9 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
     private char[] l = new char[9];
     private char[] r = new char[9];
     private char[] b = new char[9];
-    private List<TextView> textViewList = new ArrayList<>(54);
+    private List<EditText> textViewList = new ArrayList<>(54);
     private Map<Integer, Bitmap> bitmapMap = new HashMap<>(6);
     private int centerPosition = 0;
     protected Unbinder unbinder;
     /** Solving fragment that handles all solving actions. */
     private Fragment solveTab;
-
+    private String m_Text = "";
     /** The arrayList that stores image view. */
     private HashMap<Character, ImageView> imageViewMap = new HashMap<>();
 
@@ -168,14 +170,58 @@ public class MainActivity extends AppCompatActivity {
         for(Map.Entry<Character, ImageView> entry : imageViewMap.entrySet()) {
             entry.getValue().setOnClickListener(unused -> imageClicked(entry.getKey()));
         }
-
-
+        for (TextView eachView : textViewList) {
+            eachView.setOnClickListener(unused -> viewClicked(eachView));
+        }
         clear.setOnClickListener(unused -> clearInput());
         solve.setOnClickListener(unused -> solveClicked());
 
 
     }
 
+    private void viewClicked(TextView view) {
+        /*
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String viewId = view.getResources().getResourceEntryName(view.getId());
+        char side = viewId.charAt(0);
+        int position = Integer.parseInt(viewId.substring(1));
+        builder.setTitle("You are now setting the color for "+ viewId);
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK" + viewId, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text = input.getText().toString();
+                if (m_Text.equals("g")) {
+                    view.setText(m_Text);
+                    switch (side) {
+                        case 'u':
+                            for (int i = 0; i < 9; i ++) {
+                                if (i == (position - 1)) {
+                                    u[i] = m_Text.charAt(0);
+                                    break;
+                                }
+                            }
+                    }
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
+         */
+    }
     /**
      * This function is called when "solving is clicked"
      * Pops out an alert dialog that shows the result.
@@ -299,6 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 temp = l;
                 centerPosition = 1;
                 position = 'l';
+                System.out.println("Arrived here");
                 break;
             case 'r':
                 temp = r;
@@ -327,6 +374,7 @@ public class MainActivity extends AppCompatActivity {
      * Save a temp pic file.
      */
     private void takePic() {
+        System.out.println("Arrived here at takePic");
         AndPermission.with(this).runtime()
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
                 .onGranted(unused -> {
@@ -485,117 +533,117 @@ public class MainActivity extends AppCompatActivity {
 
     //Declaring views for showing the output result.
 
-    TextView u1;
-    TextView u2;
+    EditText u1;
+    EditText u2;
 
-    TextView u3;
+    EditText u3;
     //@BindView(R.id.U4)
-    TextView u4;
+    EditText u4;
     //@BindView(R.id.U5)
-    TextView u5;
+    EditText u5;
     //@BindView(R.id.U6)
-    TextView u6;
+    EditText u6;
     //@BindView(R.id.U7)
-    TextView u7;
+    EditText u7;
     //@BindView(R.id.U8)
-    TextView u8;
+    EditText u8;
     //@BindView(R.id.U9)
-    TextView u9;
+    EditText u9;
 
     //@BindView(R.id.F1)
-    TextView f1;
+    EditText f1;
     //@BindView(R.id.F2)
-    TextView f2;
+    EditText f2;
     //@BindView(R.id.F3)
-    TextView f3;
+    EditText f3;
     //@BindView(R.id.F4)
-    TextView f4;
+    EditText f4;
     //@BindView(R.id.F5)
-    TextView f5;
+    EditText f5;
     //@BindView(R.id.F6)
-    TextView f6;
+    EditText f6;
     //@BindView(R.id.F7)
-    TextView f7;
+    EditText f7;
     //@BindView(R.id.F8)
-    TextView f8;
+    EditText f8;
     //@BindView(R.id.F9)
-    TextView f9;
+    EditText f9;
 
     //@BindView(R.id.D1)
-    TextView d1;
+    EditText d1;
     //@BindView(R.id.D2)
-    TextView d2;
+    EditText d2;
     //@BindView(R.id.D3)
-    TextView d3;
+    EditText d3;
     //@BindView(R.id.D4)
-    TextView d4;
+    EditText d4;
     //@BindView(R.id.D5)
-    TextView d5;
+    EditText d5;
     //@BindView(R.id.D6)
-    TextView d6;
+    EditText d6;
     //@BindView(R.id.D7)
-    TextView d7;
+    EditText d7;
     //@BindView(R.id.D8)
-    TextView d8;
+    EditText d8;
     //@BindView(R.id.D9)
-    TextView d9;
+    EditText d9;
 
     //@BindView(R.id.L1)
-    TextView l1;
+    EditText l1;
     //@BindView(R.id.L2)
-    TextView l2;
+    EditText l2;
     //@BindView(R.id.L3)
-    TextView l3;
+    EditText l3;
     //@BindView(R.id.L4)
-    TextView l4;
+    EditText l4;
     //@BindView(R.id.L5)
-    TextView l5;
+    EditText l5;
     //@BindView(R.id.L6)
-    TextView l6;
+    EditText l6;
     //@BindView(R.id.L7)
-    TextView l7;
+    EditText l7;
     //@BindView(R.id.L8)
-    TextView l8;
+    EditText l8;
     //@BindView(R.id.L9)
-    TextView l9;
+    EditText l9;
 
     //@BindView(R.id.R1)
-    TextView r1;
+    EditText r1;
     //@BindView(R.id.R2)
-    TextView r2;
+    EditText r2;
     //@BindView(R.id.R3)
-    TextView r3;
+    EditText r3;
     //@BindView(R.id.R4)
-    TextView r4;
+    EditText r4;
     //@BindView(R.id.R5)
-    TextView r5;
+    EditText r5;
     //@BindView(R.id.R6)
-    TextView r6;
+    EditText r6;
     //@BindView(R.id.R7)
-    TextView r7;
+    EditText r7;
     //@BindView(R.id.R8)
-    TextView r8;
+    EditText r8;
     //@BindView(R.id.R9)
-    TextView r9;
+    EditText r9;
 
     //@BindView(R.id.B1)
-    TextView b1;
+    EditText b1;
     //@BindView(R.id.B2)
-    TextView b2;
+    EditText b2;
     //@BindView(R.id.B3)
-    TextView b3;
+    EditText b3;
     //@BindView(R.id.B4)
-    TextView b4;
+    EditText b4;
     //@BindView(R.id.B5)
-    TextView b5;
+    EditText b5;
     //@BindView(R.id.B6)
-    TextView b6;
+    EditText b6;
     //@BindView(R.id.B7)
-    TextView b7;
+    EditText b7;
     //@BindView(R.id.B8)
-    TextView b8;
+    EditText b8;
     //@BindView(R.id.B9)
-    TextView b9;
+    EditText b9;
 
     public void initializeView(Fragment fragment) {
         u1 = fragment.getView().findViewById(R.id.U1);
