@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -230,21 +229,24 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U1" />
+                android:maxLength="1"
+                android:hint="U1" />
 
             <EditText
                 android:id="@+id/U2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U2" />
+                android:maxLength="1"
+                android:hint="U2" />
 
             <EditText
                 android:id="@+id/U3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U3" />
+                android:maxLength="1"
+                android:hint="U3" />
 
             <View
                 android:layout_width="0dp"
@@ -272,21 +274,24 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U4" />
+                android:maxLength="1"
+                android:hint="U4" />
 
             <EditText
                 android:id="@+id/U5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U5" />
+                android:maxLength="1"
+                android:hint="U5" />
 
             <EditText
                 android:id="@+id/U6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
+                android:maxLength="1"
                 android:textSize="10sp"
-                android:text="U6" />
+                android:hint="U6" />
 
             <View
                 android:layout_width="0dp"
@@ -313,21 +318,24 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U7" />
+                android:maxLength="1"
+                android:hint="U7" />
 
             <EditText
                 android:id="@+id/U8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U8" />
+                android:maxLength="1"
+                android:hint="U8" />
 
             <EditText
                 android:id="@+id/U9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="U9" />
+                android:maxLength="1"
+                android:hint="U9" />
 
             <View
                 android:layout_width="0dp"
@@ -350,78 +358,90 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L1" />
+                android:maxLength="1"
+                android:hint="L1" />
 
             <EditText
                 android:id="@+id/L2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L2" />
+                android:maxLength="1"
+                android:hint="L2" />
 
             <EditText
                 android:id="@+id/L3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L3" />
+                android:maxLength="1"
+                android:hint="L3" />
 
             <EditText
                 android:id="@+id/F1"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F1" />
+                android:maxLength="1"
+                android:hint="F1" />
             <EditText
                 android:id="@+id/F2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F2" />
+                android:maxLength="1"
+                android:hint="F2" />
             <EditText
                 android:id="@+id/F3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F3" />
+                android:maxLength="1"
+                android:hint="F3" />
 
             <EditText
                 android:id="@+id/R1"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R1" />
+                android:maxLength="1"
+                android:hint="R1" />
             <EditText
                 android:id="@+id/R2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R2" />
+                android:maxLength="1"
+                android:hint="R2" />
             <EditText
                 android:id="@+id/R3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R3" />
+                android:maxLength="1"
+                android:hint="R3" />
 
             <EditText
                 android:id="@+id/B1"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B1" />
+                android:maxLength="1"
+                android:hint="B1" />
             <EditText
                 android:id="@+id/B2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B2" />
+                android:maxLength="1"
+                android:hint="B2" />
             <EditText
                 android:id="@+id/B3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B3" />
+                android:maxLength="1"
+                android:hint="B3" />
         </LinearLayout>
 
         <LinearLayout
@@ -434,7 +454,8 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L4" />
+                android:maxLength="1"
+                android:hint="L4" />
 
             <EditText
                 android:id="@+id/L5"
@@ -442,71 +463,82 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapCharacters"
                 android:textSize="10sp"
-                android:text="L5" />
+                android:maxLength="1"
+                android:hint="L5" />
 
             <EditText
                 android:id="@+id/L6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L6" />
+                android:maxLength="1"
+                android:hint="L6" />
 
             <EditText
                 android:id="@+id/F4"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F4" />
+                android:maxLength="1"
+                android:hint="F4" />
             <EditText
                 android:id="@+id/F5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F5" />
+                android:maxLength="1"
+                android:hint="F5" />
             <EditText
                 android:id="@+id/F6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F6]" />
+                android:maxLength="1"
+                android:hint="F6" />
 
             <EditText
                 android:id="@+id/R4"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R4" />
+                android:maxLength="1"
+                android:hint="R4" />
             <EditText
                 android:id="@+id/R5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R5" />
+                android:maxLength="1"
+                android:hint="R5" />
             <EditText
                 android:id="@+id/R6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R6" />
+                android:maxLength="1"
+                android:hint="R6" />
 
             <EditText
                 android:id="@+id/B4"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B4" />
+                android:maxLength="1"
+                android:hint="B4" />
             <EditText
                 android:id="@+id/B5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B5" />
+                android:maxLength="1"
+                android:hint="B5" />
             <EditText
                 android:id="@+id/B6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B6" />
+                android:maxLength="1"
+                android:hint="B6" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="300dp"
@@ -518,78 +550,90 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L7" />
+                android:maxLength="1"
+                android:hint="L7" />
 
             <EditText
                 android:id="@+id/L8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L8" />
+                android:maxLength="1"
+                android:hint="L8" />
 
             <EditText
                 android:id="@+id/L9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="L9" />
+                android:maxLength="1"
+                android:hint="L9" />
 
             <EditText
                 android:id="@+id/F7"
                 android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:textSize="10sp"
-                android:text="F7" />
+                android:maxLength="1"
+                android:hint="F7" />
             <EditText
                 android:id="@+id/F8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F8" />
+                android:maxLength="1"
+                android:hint="F8" />
             <EditText
                 android:id="@+id/F9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="F9" />
+                android:maxLength="1"
+                android:hint="F9" />
 
             <EditText
                 android:id="@+id/R7"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R7" />
+                android:maxLength="1"
+                android:hint="R7" />
             <EditText
                 android:id="@+id/R8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R8" />
+                android:maxLength="1"
+                android:hint="R8" />
             <EditText
                 android:id="@+id/R9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="R9" />
+                android:maxLength="1"
+                android:hint="R9" />
 
             <EditText
                 android:id="@+id/B7"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B7" />
+                android:maxLength="1"
+                android:hint="B7" />
             <EditText
                 android:id="@+id/B8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B8" />
+                android:maxLength="1"
+                android:hint="B8" />
             <EditText
                 android:id="@+id/B9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="B9" />
+                android:maxLength="1"
+                android:hint="B9" />
         </LinearLayout>
 
         <LinearLayout
@@ -607,19 +651,22 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D1" />
+                android:maxLength="1"
+                android:hint="D1" />
             <EditText
                 android:id="@+id/D2"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D2" />
+                android:maxLength="1"
+                android:hint="D2" />
             <EditText
                 android:id="@+id/D3"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D3" />
+                android:maxLength="1"
+                android:hint="D3" />
 
             <View
                 android:layout_width="0dp"
@@ -647,19 +694,22 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D4" />
+                android:maxLength="1"
+                android:hint="D4" />
             <EditText
                 android:id="@+id/D5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D5" />
+                android:maxLength="1"
+                android:hint="D5" />
             <EditText
                 android:id="@+id/D6"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D6" />
+                android:maxLength="1"
+                android:hint="D6" />
 
             <View
                 android:layout_width="0dp"
@@ -687,19 +737,22 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D7" />
+                android:maxLength="1"
+                android:hint="D7" />
             <EditText
                 android:id="@+id/D8"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D8" />
+                android:maxLength="1"
+                android:hint="D8" />
             <EditText
                 android:id="@+id/D9"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="D9" />
+                android:maxLength="1"
+                android:hint="D9" />
 
             <View
                 android:layout_width="0dp"

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Click the 3x3 Box\nTake photos of the six sides of the rubik's cube in order"
-            android:textColor="#FFFF00"
+            android:textColor="#008000"
+            android:layout_gravity="center_horizontal"
             android:textStyle="bold|italic" />
 
         <LinearLayout
@@ -107,6 +110,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
