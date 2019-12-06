@@ -659,10 +659,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private synchronized void getColor() {
-        Bitmap bitmap = bitmapMap.get(centerPosition);
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
+        Bitmap source = bitmapMap.get(centerPosition);
+        int width = source.getWidth();
+        int height = source.getHeight();
         int p = 0;
+        /*
         for (int i = 0; i < 9; i++) {
             switch (i) {
                 case 0:
@@ -699,6 +700,25 @@ public class MainActivity extends AppCompatActivity {
                 temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(0);
             }
         }
+        */
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Bitmap subBitmap = Bitmap.createBitmap(source,
+                        (width/3) * j,
+                        (height/3) * i,
+                        (width/3),
+                        (height/3));
+                double[] avgRGB = ColorProcess.averageColor(subBitmap);
+                Log.d("color debugging ", "position " + i + "and " + j);
+                Log.d("color debugging", "location is " + (width/3) * j + " + " + (height/3) * i);
+                Log.d("color debugging", "HSV values " + Arrays.toString(avgRGB));
+                String color = ColorProcess.getColorName(avgRGB);
+                textViewList.get(centerPosition * 9 + p).setText(color);
+                temp[p] = color.charAt(1);
+                p++;
+            }
+        }
+        Log.d("resolved color is", Arrays.toString(temp));
     }
 
     //Declaring views for showing the output result.
