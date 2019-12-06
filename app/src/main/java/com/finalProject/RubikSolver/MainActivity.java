@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Please enter ONE, LOWER-CASE letter: r as red, g as green, b as blue, w as white, o as orange, and y as yellow");
 // Set up the input
         final EditText input = new EditText(this);
-        input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(20) });
+        input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(1) });
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
         input.setHint("Enter your letter here: ");
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                     view.setText("b");
                     addUserInputToArray(whichSide, whichPos, userInput);
                 } else {
-                    System.out.println();
+                    inValidEntry(view);
                 }
             }
         });
@@ -300,6 +300,59 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+    private void inValidEntry(EditText view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String viewId = view.getResources().getResourceEntryName(view.getId());
+        char whichSide = viewId.charAt(0);
+        int whichPos = Integer.parseInt(viewId.substring(1));
+        builder.setTitle("NON-VALID entry for " + viewId + "! Please Retry. ");
+        builder.setMessage("Please enter ONE, LOWER-CASE letter: r as red, g as green, b as blue, w as white, o as orange, and y as yellow");
+// Set up the input
+        final EditText input = new EditText(this);
+        input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(1) });
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        input.setHint("Enter your letter here: ");
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                char userInput = input.getText().toString().charAt(0);
+                if (userInput == 'g' || userInput == 'G') {
+                    view.setText("g");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'w' || userInput == 'W') {
+                    view.setText("w");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'o' || userInput == 'O'){
+                    view.setText("o");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'r' || userInput == 'R') {
+                    view.setText("r");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'y' || userInput == 'Y') {
+                    view.setText("y");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'b'  || userInput == 'B') {
+                    view.setText("b");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else {
+                    inValidEntry(view);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
     /**
      * This function is called when "solving is clicked"
