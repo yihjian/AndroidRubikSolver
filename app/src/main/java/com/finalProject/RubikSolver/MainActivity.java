@@ -45,9 +45,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import static java.lang.Character.toLowerCase;
@@ -695,7 +692,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             System.out.println(centerPosition * 9 + i);
-            if (textViewList.get(centerPosition * 9 + i) != null) {
+            if (textViewList.get(centerPosition * 9 + i) != null && (centerPosition * 9 + i) != 4
+                    && (centerPosition * 9 + i) != 13  && (centerPosition * 9 + i) != 22  && (centerPosition * 9 + i) != 31
+                    && (centerPosition * 9 + i) != 40 && (centerPosition * 9 + i) != 49) {
                 textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
                 temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(0);
             }
@@ -714,7 +713,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("color debugging", "HSV values " + Arrays.toString(avgRGB));
                 String color = ColorProcess.getColorName(avgRGB);
                 textViewList.get(centerPosition * 9 + p).setText(color);
-                temp[p] = color.charAt(1);
+                temp[p] = color.charAt(0);
                 p++;
             }
         }
@@ -958,11 +957,11 @@ public class MainActivity extends AppCompatActivity {
         textViewList.add(d9);
     }
     private void initilizeCenterPiece() {
-        u[5] = 'w';
-        l[5] = 'o';
-        f[5] = 'g';
-        r[5] = 'r';
-        b[5] = 'b';
-        d[5] = 'y';
+        u[4] = 'w';
+        l[4] = 'o';
+        f[4] = 'g';
+        r[4] = 'r';
+        b[4] = 'b';
+        d[4] = 'y';
     }
 }

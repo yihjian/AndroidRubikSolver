@@ -67,17 +67,17 @@ public class ColorProcess {
 
         switch (index) {
             case 0:
-                return "[r]";
+                return "r";
             case 1:
-                return "[o]";
+                return "o";
             case 2:
-                return "[g]";
+                return "g";
             case 3:
-                return "[b]";
+                return "b";
             case 4:
-                return "[y]";
+                return "y";
             default:
-                    return "[w]";
+                    return "w";
         }
 
     }
