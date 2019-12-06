@@ -712,7 +712,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("color debugging", "location is " + (width/3) * j + " + " + (height/3) * i);
                 Log.d("color debugging", "HSV values " + Arrays.toString(avgRGB));
                 String color = ColorProcess.getColorName(avgRGB);
-                textViewList.get(centerPosition * 9 + p).setText(color);
+                if ((centerPosition * 9 + p) != 4 && (centerPosition * 9 + p) != 13
+                        && (centerPosition * 9 + p) != 22  && (centerPosition * 9 + p) != 31
+                        && (centerPosition * 9 + p) != 40 && (centerPosition * 9 + p) != 49) {
+                    textViewList.get(centerPosition * 9 + p).setText(color);
+                }
                 temp[p] = color.charAt(0);
                 p++;
             }
