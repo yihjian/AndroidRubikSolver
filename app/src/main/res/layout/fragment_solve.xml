@@ -11,6 +11,19 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Click on any of the six square below to take pictures. Make sure the picture you take matches the center-piece square of the side." />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="280dp"
@@ -36,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="U" />
 
                 <ImageView
@@ -68,13 +82,14 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:background="@drawable/grid"
+                android:background="@drawable/orange"
                 android:clickable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="L" />
 
                 <ImageView
@@ -92,13 +107,14 @@
                 android:layout_height="70dp"
                 android:layout_margin="1px"
                 android:layout_weight="1"
-                android:background="@drawable/grid"
+                android:background="@drawable/green"
                 android:clickable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="F" />
 
                 <ImageView
@@ -114,13 +130,14 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:background="@drawable/grid"
+                android:background="@drawable/red"
                 android:clickable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="R" />
 
                 <ImageView
@@ -137,13 +154,14 @@
                 android:layout_height="70dp"
                 android:layout_marginLeft="1px"
                 android:layout_weight="1"
-                android:background="@drawable/grid"
+                android:background="@drawable/blue"
                 android:clickable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="B" />
 
                 <ImageView
@@ -170,13 +188,14 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:background="@drawable/grid"
+                android:background="@drawable/yellow"
                 android:clickable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="10dp"
                     android:text="D" />
 
                 <ImageView
@@ -210,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"
                 android:textStyle="bold|italic"
-                android:text="A visualization of the scanning is shown below (Note that r as Red, y as Yellow, w as White, b as Blue, o as Orange, and g as Green)"/>
+                android:text="A visualization of the scanning result is shown below (Note that r as Red, y as Yellow, w as White, b as Blue, o as Orange, and g as Green)"/>
 
         </LinearLayout>
         <LinearLayout
@@ -285,10 +304,11 @@
                 android:id="@+id/U5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="U5" />
+                android:hint="U5"
+                android:maxLength="1"
+                android:text="w"
+                android:textSize="10sp" />
 
             <EditText
                 android:id="@+id/U6"
@@ -483,11 +503,12 @@
                 android:id="@+id/L5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:inputType="textCapCharacters"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="L5" />
+                android:hint="L5"
+                android:inputType="textCapCharacters"
+                android:maxLength="1"
+                android:text="o"
+                android:textSize="10sp" />
 
             <EditText
                 android:id="@+id/L6"
@@ -506,14 +527,16 @@
                 android:maxLength="1"
                 android:focusable="false"
                 android:hint="F4" />
+
             <EditText
                 android:id="@+id/F5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="F5" />
+                android:hint="F5"
+                android:maxLength="1"
+                android:text="g"
+                android:textSize="10sp" />
             <EditText
                 android:id="@+id/F6"
                 android:layout_width="25dp"
@@ -531,14 +554,16 @@
                 android:maxLength="1"
                 android:focusable="false"
                 android:hint="R4" />
+
             <EditText
                 android:id="@+id/R5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="R5" />
+                android:hint="R5"
+                android:maxLength="1"
+                android:text="r"
+                android:textSize="10sp" />
             <EditText
                 android:id="@+id/R6"
                 android:layout_width="25dp"
@@ -556,14 +581,16 @@
                 android:maxLength="1"
                 android:focusable="false"
                 android:hint="B4" />
+
             <EditText
                 android:id="@+id/B5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="B5" />
+                android:hint="B5"
+                android:maxLength="1"
+                android:text="b"
+                android:textSize="10sp" />
             <EditText
                 android:id="@+id/B6"
                 android:layout_width="25dp"
@@ -745,14 +772,16 @@
                 android:maxLength="1"
                 android:focusable="false"
                 android:hint="D4" />
+
             <EditText
                 android:id="@+id/D5"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:maxLength="1"
                 android:focusable="false"
-                android:hint="D5" />
+                android:hint="D5"
+                android:maxLength="1"
+                android:text="y"
+                android:textSize="10sp" />
             <EditText
                 android:id="@+id/D6"
                 android:layout_width="25dp"

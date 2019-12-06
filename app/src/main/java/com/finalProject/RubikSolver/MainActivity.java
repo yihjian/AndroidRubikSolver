@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         Arrays.fill(l, 'n');
         Arrays.fill(r, 'n');
         Arrays.fill(b, 'n');
+        initilizeCenterPiece();
 
         // This doesn't work for some reason. Should be the same logic as the listener.
 //        try {
@@ -302,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void inValidEntry(EditText view) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String viewId = view.getResources().getResourceEntryName(view.getId());
         char whichSide = viewId.charAt(0);
@@ -379,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
         b = new char[]{'w', 'w', 'r', 'r', 'b', 'o', 'y', 'y', 'r'};
 
         // Convert traditional RGB chars to to UBL definition used by min2phase*/
+        initilizeCenterPiece();
         String rgbCube = new String(u) + new String(r) + new String(f) + new String(d) + new String(l) + new String(b);
         Log.d("cube before switching: ", rgbCube);
         rgbCube = rgbCube.replace(u[4], 'U');
@@ -448,6 +449,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearInput() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setTitle("By clicking YES, you will restart the solver.");
+        alertDialogBuilder
+                .setMessage("Click NO to get back.")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
         Log.d("Clearing input clicked: ", "not doing anything yet");
 
     }
@@ -899,5 +919,12 @@ public class MainActivity extends AppCompatActivity {
         textViewList.add(d8);
         textViewList.add(d9);
     }
-
+    private void initilizeCenterPiece() {
+        u[5] = 'w';
+        l[5] = 'o';
+        f[5] = 'g';
+        r[5] = 'r';
+        b[5] = 'b';
+        d[5] = 'y';
+    }
 }
