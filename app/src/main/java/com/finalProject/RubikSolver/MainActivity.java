@@ -197,6 +197,10 @@ public class MainActivity extends AppCompatActivity {
         String viewId = view.getResources().getResourceEntryName(view.getId());
         char whichSide = viewId.charAt(0);
         int whichPos = Integer.parseInt(viewId.substring(1));
+        if (whichPos == 5) {
+            unChangeablePiece(view);
+            return;
+        }
         builder.setTitle("You are now setting the color for "+ viewId);
         builder.setMessage("Please enter ONE, LOWER-CASE letter: r as red, g as green, b as blue, w as white, o as orange, and y as yellow");
 // Set up the input
@@ -352,6 +356,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        builder.show();
+    }
+    private void unChangeablePiece(EditText view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String viewId = view.getResources().getResourceEntryName(view.getId());
+        builder.setTitle("The piece " + viewId + " cannot be changed.");
+        builder.setMessage("It is the center piece and is fixed.");
+
+        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         builder.show();
     }
     /**
