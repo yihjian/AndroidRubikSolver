@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static java.lang.Character.toLowerCase;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         Arrays.fill(l, 'n');
         Arrays.fill(r, 'n');
         Arrays.fill(b, 'n');
+        initilizeCenterPiece();
 
         // This doesn't work for some reason. Should be the same logic as the listener.
 //        try {
@@ -170,7 +174,15 @@ public class MainActivity extends AppCompatActivity {
         for(Map.Entry<Character, ImageView> entry : imageViewMap.entrySet()) {
             entry.getValue().setOnClickListener(unused -> imageClicked(entry.getKey()));
         }
-        for (TextView eachView : textViewList) {
+        /*for (EditText eachView : textViewList) {
+            eachView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }*/
+        for (EditText eachView : textViewList) {
             eachView.setOnClickListener(unused -> viewClicked(eachView));
         }
         clear.setOnClickListener(unused -> clearInput());
@@ -179,35 +191,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void viewClicked(TextView view) {
-        /*
+    private void viewClicked(EditText view) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String viewId = view.getResources().getResourceEntryName(view.getId());
-        char side = viewId.charAt(0);
-        int position = Integer.parseInt(viewId.substring(1));
+        char whichSide = viewId.charAt(0);
+        int whichPos = Integer.parseInt(viewId.substring(1));
+        if (whichPos == 5) {
+            unChangeablePiece(view);
+            return;
+        }
         builder.setTitle("You are now setting the color for "+ viewId);
+        builder.setMessage("Please enter ONE, LOWER-CASE letter: r as red, g as green, b as blue, w as white, o as orange, and y as yellow");
 // Set up the input
         final EditText input = new EditText(this);
+        input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(1) });
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        input.setHint("Enter your letter here: ");
         builder.setView(input);
 
 // Set up the buttons
-        builder.setPositiveButton("OK" + viewId, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                if (m_Text.equals("g")) {
-                    view.setText(m_Text);
-                    switch (side) {
-                        case 'u':
-                            for (int i = 0; i < 9; i ++) {
-                                if (i == (position - 1)) {
-                                    u[i] = m_Text.charAt(0);
-                                    break;
-                                }
-                            }
-                    }
+                char userInput = input.getText().toString().charAt(0);
+                if (userInput == 'g' || userInput == 'G') {
+                    view.setText("g");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'w' || userInput == 'W') {
+                    view.setText("w");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'o' || userInput == 'O'){
+                    view.setText("o");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'r' || userInput == 'R') {
+                    view.setText("r");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'y' || userInput == 'Y') {
+                    view.setText("y");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'b'  || userInput == 'B') {
+                    view.setText("b");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else {
+                    inValidEntry(view);
                 }
             }
         });
@@ -219,8 +247,130 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+    private void addUserInputToArray(char whichSide,int whichPos, char userInput) {
+        switch (whichSide) {
+            case 'U':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        u[i] = toLowerCase(userInput);
+                        System.out.println("u side at position " + whichPos + " is " +  u[i]);
+                        break;
+                    }
+                }
+                break;
+            case 'L':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        l[i] = toLowerCase(userInput);
+                        System.out.println("l side at position " + whichPos + " is " +  l[i]);
+                        break;
+                    }
+                }
+                break;
+            case 'F':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        f[i] = toLowerCase(userInput);
+                        System.out.println("f side at position " + whichPos + " is " +  f[i]);
+                        break;
+                    }
+                }
+                break;
+            case 'R':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        r[i] = toLowerCase(userInput);
+                        System.out.println("r side at position " + whichPos + " is " +  f[i]);
+                        break;
+                    }
+                }
+                break;
+            case 'B':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        b[i] = toLowerCase(userInput);
+                        System.out.println("b side at position " + whichPos + " is " +  b[i]);
+                        break;
+                    }
+                }
+                break;
+            case 'D':
+                for (int i = 0; i < 9; i ++) {
+                    if (i == (whichPos - 1)) {
+                        d[i] = toLowerCase(userInput);
+                        System.out.println("d side at position " + whichPos + " is " +  d[i]);
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+    private void inValidEntry(EditText view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String viewId = view.getResources().getResourceEntryName(view.getId());
+        char whichSide = viewId.charAt(0);
+        int whichPos = Integer.parseInt(viewId.substring(1));
+        builder.setTitle("NON-VALID entry for " + viewId + "! Please Retry. ");
+        builder.setMessage("Please enter ONE, LOWER-CASE letter: r as red, g as green, b as blue, w as white, o as orange, and y as yellow");
+// Set up the input
+        final EditText input = new EditText(this);
+        input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(1) });
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        input.setHint("Enter your letter here: ");
+        builder.setView(input);
 
-         */
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                char userInput = input.getText().toString().charAt(0);
+                if (userInput == 'g' || userInput == 'G') {
+                    view.setText("g");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'w' || userInput == 'W') {
+                    view.setText("w");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'o' || userInput == 'O'){
+                    view.setText("o");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'r' || userInput == 'R') {
+                    view.setText("r");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'y' || userInput == 'Y') {
+                    view.setText("y");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else if (userInput == 'b'  || userInput == 'B') {
+                    view.setText("b");
+                    addUserInputToArray(whichSide, whichPos, userInput);
+                } else {
+                    inValidEntry(view);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+    private void unChangeablePiece(EditText view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String viewId = view.getResources().getResourceEntryName(view.getId());
+        builder.setTitle("The piece " + viewId + " cannot be changed.");
+        builder.setMessage("It is the center piece and is fixed.");
+
+        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
     /**
      * This function is called when "solving is clicked"
@@ -247,6 +397,7 @@ public class MainActivity extends AppCompatActivity {
         b = new char[]{'w', 'w', 'r', 'r', 'b', 'o', 'y', 'y', 'r'};
 
         // Convert traditional RGB chars to to UBL definition used by min2phase*/
+        initilizeCenterPiece();
         String rgbCube = new String(u) + new String(r) + new String(f) + new String(d) + new String(l) + new String(b);
         Log.d("cube before switching: ", rgbCube);
         rgbCube = rgbCube.replace(u[4], 'U');
@@ -316,8 +467,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearInput() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setTitle("By clicking YES, you will restart the solver.");
+        alertDialogBuilder
+                .setMessage("Click NO to get back.")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
         Log.d("Clearing input clicked: ", "not doing anything yet");
-        recreate();
+
     }
 
     /** Called when user tabs specific block to take picture of cube.
@@ -526,7 +696,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(centerPosition * 9 + i);
             if (textViewList.get(centerPosition * 9 + i) != null) {
                 textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
-                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(1);
+                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(0);
             }
         }
     }
@@ -767,5 +937,12 @@ public class MainActivity extends AppCompatActivity {
         textViewList.add(d8);
         textViewList.add(d9);
     }
-
+    private void initilizeCenterPiece() {
+        u[5] = 'w';
+        l[5] = 'o';
+        f[5] = 'g';
+        r[5] = 'r';
+        b[5] = 'b';
+        d[5] = 'y';
+    }
 }

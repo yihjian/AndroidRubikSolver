@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Click the 3x3 Box\nTake photos of the six sides of the rubik's cube in order"
+            android:text="Click the 3x3 Box\nTake photos of the six sides of the rubik's cube in order\ng在f,w在u可获得最好效果"
             android:textColor="#008000"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold|italic" />
