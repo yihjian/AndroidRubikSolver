@@ -230,6 +230,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U1" />
 
             <EditText
@@ -238,6 +239,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U2" />
 
             <EditText
@@ -246,6 +248,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U3" />
 
             <View
@@ -275,6 +278,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U4" />
 
             <EditText
@@ -283,6 +287,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U5" />
 
             <EditText
@@ -291,6 +296,7 @@
                 android:layout_height="wrap_content"
                 android:maxLength="1"
                 android:textSize="10sp"
+                android:focusable="false"
                 android:hint="U6" />
 
             <View
@@ -319,6 +325,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U7" />
 
             <EditText
@@ -327,6 +334,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U8" />
 
             <EditText
@@ -335,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="U9" />
 
             <View
@@ -359,6 +368,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L1" />
 
             <EditText
@@ -367,6 +377,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L2" />
 
             <EditText
@@ -375,6 +386,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L3" />
 
             <EditText
@@ -383,6 +395,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F1" />
             <EditText
                 android:id="@+id/F2"
@@ -390,6 +403,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F2" />
             <EditText
                 android:id="@+id/F3"
@@ -397,6 +411,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F3" />
 
             <EditText
@@ -405,6 +420,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R1" />
             <EditText
                 android:id="@+id/R2"
@@ -412,6 +428,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R2" />
             <EditText
                 android:id="@+id/R3"
@@ -419,6 +436,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R3" />
 
             <EditText
@@ -427,6 +445,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B1" />
             <EditText
                 android:id="@+id/B2"
@@ -434,6 +453,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B2" />
             <EditText
                 android:id="@+id/B3"
@@ -441,6 +461,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B3" />
         </LinearLayout>
 
@@ -455,6 +476,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L4" />
 
             <EditText
@@ -464,6 +486,7 @@
                 android:inputType="textCapCharacters"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L5" />
 
             <EditText
@@ -472,6 +495,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L6" />
 
             <EditText
@@ -480,6 +504,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F4" />
             <EditText
                 android:id="@+id/F5"
@@ -487,6 +512,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F5" />
             <EditText
                 android:id="@+id/F6"
@@ -494,6 +520,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F6" />
 
             <EditText
@@ -502,6 +529,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R4" />
             <EditText
                 android:id="@+id/R5"
@@ -509,6 +537,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R5" />
             <EditText
                 android:id="@+id/R6"
@@ -516,6 +545,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R6" />
 
             <EditText
@@ -524,6 +554,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B4" />
             <EditText
                 android:id="@+id/B5"
@@ -531,6 +562,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B5" />
             <EditText
                 android:id="@+id/B6"
@@ -538,6 +570,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B6" />
         </LinearLayout>
         <LinearLayout
@@ -551,6 +584,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L7" />
 
             <EditText
@@ -559,6 +593,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L8" />
 
             <EditText
@@ -567,6 +602,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="L9" />
 
             <EditText
@@ -575,6 +611,7 @@
                 android:layout_height="match_parent"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F7" />
             <EditText
                 android:id="@+id/F8"
@@ -582,6 +619,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F8" />
             <EditText
                 android:id="@+id/F9"
@@ -589,6 +627,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="F9" />
 
             <EditText
@@ -597,6 +636,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R7" />
             <EditText
                 android:id="@+id/R8"
@@ -604,6 +644,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R8" />
             <EditText
                 android:id="@+id/R9"
@@ -611,6 +652,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="R9" />
 
             <EditText
@@ -619,6 +661,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B7" />
             <EditText
                 android:id="@+id/B8"
@@ -626,6 +669,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B8" />
             <EditText
                 android:id="@+id/B9"
@@ -633,6 +677,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="B9" />
         </LinearLayout>
 
@@ -652,6 +697,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D1" />
             <EditText
                 android:id="@+id/D2"
@@ -659,6 +705,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D2" />
             <EditText
                 android:id="@+id/D3"
@@ -666,6 +713,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D3" />
 
             <View
@@ -695,6 +743,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D4" />
             <EditText
                 android:id="@+id/D5"
@@ -702,6 +751,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D5" />
             <EditText
                 android:id="@+id/D6"
@@ -709,6 +759,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D6" />
 
             <View
@@ -738,6 +789,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D7" />
             <EditText
                 android:id="@+id/D8"
@@ -745,6 +797,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D8" />
             <EditText
                 android:id="@+id/D9"
@@ -752,6 +805,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:maxLength="1"
+                android:focusable="false"
                 android:hint="D9" />
 
             <View
