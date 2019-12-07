@@ -10,4 +10,12 @@
     <string name="zoom">Move and Zoom</string>
     <string name="back">Back</string>
     <string name="next">Next</string>
+    <string name="instruction">Start taking picture with Front face (green center block).
+        Then rotate vertically to take pictures for Upper surface and Down surface.
+        After that, rotate horizontally to take pictures of Left, Right and Back surface.
+        (Note that you need to rotate right twice for the back surface)</string>
+    <string name="aboutUs">We are a group of students from University of Illinois Urbana-Champaign. We coded this program as the final project of our CS125 class.</string>
+    <string name="gitHubLink">See our project <a href="https://github.com/yihjian/AndroidRubikSolver">Github</a> for further details</string>
+    <string name="improve">If you find bugs during usage, or the color recognition process is inaccurate, we kindly ask that you help us improve by filling out
+        this <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsI0mlljeR2fkgy96jxa-5joWKlDM5GEEWKH6JKgSqKNPA9A/viewform?usp=sf_link">Google form</a></string>
 </resources>

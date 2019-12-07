@@ -5,13 +5,21 @@ import android.graphics.Color;
 
 public class ColorProcess {
 
+    /**
+     * Constant color values. !TODO optimize them to find best color fits.
+     */
     private static final int[] RED = {255, 0, 0};
-    private static final int[] ORANGE = {255, 150, 0};
+    private static final int[] ORANGE = {255, 140,  0};
     private static final int[] GREEN = {0, 255, 0};
     private static final int[] BLUE = {0, 0, 255};
     private static final int[] YELLOW = {255, 255, 0};
     private static final int[] WHITE = {255, 255, 255};
 
+    /**
+     * Get the average rbg values of the image.
+     * @param bm the bitmap that needs to be calculated.
+     * @return double array that contains avgR, avgG, avgB
+     */
     public static double[] averageColor(Bitmap bm) {
         int w = bm.getWidth();
         int h = bm.getHeight();
@@ -21,12 +29,15 @@ public class ColorProcess {
         double b = 0;
         int[] pixels = new int[s];
         bm.getPixels(pixels, 0, w, 0, 0, w, h);
+
+        //Loop through every pixel to calculate avg RGB value.
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 int c = pixels[i * w + j];
                 int pr = Color.red(c);
                 int pg = Color.green(c);
                 int pb = Color.blue(c);
+                // Ignore gray-ish colors, not sure if it's the best idea.
                 if (pr < 75 && pg < 75 && pb < 75) {
                     s--;
                     continue;
@@ -43,7 +54,12 @@ public class ColorProcess {
         return rgb;
     }
 
-    public static String getColorName(double[] rgb) {
+    /**
+     * This function turns rbg values into colors by using least square difference.
+     * @param rgb double array that contains r, g and b values.
+     * @return a char that represent color.
+     */
+    public static char getColorName(double[] rgb) {
         double r = rgb[0];
         double g = rgb[1];
         double b = rgb[2];
@@ -67,17 +83,17 @@ public class ColorProcess {
 
         switch (index) {
             case 0:
-                return "[r]";
+                return 'r';
             case 1:
-                return "[o]";
+                return 'o';
             case 2:
-                return "[g]";
+                return 'g';
             case 3:
-                return "[b]";
+                return 'b';
             case 4:
-                return "[y]";
+                return 'y';
             default:
-                    return "[w]";
+                return 'w';
         }
 
     }

@@ -227,8 +227,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FF0000"
-                android:textStyle="bold|italic"
+                android:textStyle="italic"
                 android:text="A visualization of the scanning result is shown below (Note that r as Red, y as Yellow, w as White, b as Blue, o as Orange, and g as Green)"/>
 
         </LinearLayout>
@@ -861,8 +860,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/cardview_dark_background"
-                android:textColor="@color/colorAccent"
+                android:background="#C0C0C0"
+                android:textColor="#292421"
                 android:text="@string/clear" />
 
             <Button
@@ -871,8 +870,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/cardview_dark_background"
-                android:textColor="@color/colorAccent"
+                android:background="#C0C0C0"
+                android:textColor="#292421"
                 android:text="@string/solve" />
 
         </LinearLayout>

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.finalProject.RubikSolver.min2phase.Search;
-import com.finalProject.RubikSolver.min2phase.Tools;
 import com.finalProject.RubikSolver.ui.main.SectionsPagerAdapter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
@@ -46,10 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 import static java.lang.Character.toLowerCase;
 
 
@@ -57,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAPTURE = 233;
     private static final int REQUEST_CROP_PHOTO = 998;
+
     private char position;
     /** Char arrays that stores the color of each face.
      *  !!!!!!!!!!!!!!!!!!!!!!!
@@ -79,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
     private List<EditText> textViewList = new ArrayList<>(54);
     private Map<Integer, Bitmap> bitmapMap = new HashMap<>(6);
     private int centerPosition = 0;
-    protected Unbinder unbinder;
+
     /** Solving fragment that handles all solving actions. */
     private Fragment solveTab;
-    private String m_Text = "";
+
     /** The arrayList that stores image view. */
     private HashMap<Character, ImageView> imageViewMap = new HashMap<>();
 
@@ -95,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Initialize the two tab layout.
         setContentView(R.layout.activity_main);
-        //unbinder = ButterKnife.bind(this);
         final SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -110,17 +104,6 @@ public class MainActivity extends AppCompatActivity {
         Arrays.fill(r, 'n');
         Arrays.fill(b, 'n');
         initilizeCenterPiece();
-
-        // This doesn't work for some reason. Should be the same logic as the listener.
-//        try {
-//            solveTab = sectionsPagerAdapter.getItem(1);
-//            Log.d("fragment", solveTab.toString());
-//            View a = solveTab.getView();
-//            Log.d("fragment", a.toString());
-//            handleSolvingAction(solveTab);
-//        } catch (NullPointerException e) {
-//            Log.d("nullpointer", "Strange null pointer case");
-//        }
 
         //Set on select listener for tabs. When solving tab is selected, start solving process.
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -145,20 +128,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*@Override
-    protected void onDestroy() {
-        unbinder.unbind();
-        super.onDestroy();
-    }*/
-
     /**
      * This function handles the solving activity.
      * It connects the functions of taking photo and outputting result.
      * @param fragment: the solving fragment tab.
      */
     private void handleSolvingAction(Fragment fragment) {
-        //Log.d("textbox is ", a.getText().toString());
-
         Button solve = fragment.getView().findViewById(R.id.solve);
         Button clear = fragment.getView().findViewById(R.id.clear);
 
@@ -169,19 +144,13 @@ public class MainActivity extends AppCompatActivity {
         imageViewMap.put('l', fragment.getView().findViewById(R.id.lIv));
         imageViewMap.put('r', fragment.getView().findViewById(R.id.rIv));
         imageViewMap.put('b', fragment.getView().findViewById(R.id.bIv));
+
+        //Retrieve all the editText and set up onClickListener.
         initializeView(fragment);
         addView();
         for(Map.Entry<Character, ImageView> entry : imageViewMap.entrySet()) {
             entry.getValue().setOnClickListener(unused -> imageClicked(entry.getKey()));
         }
-        /*for (EditText eachView : textViewList) {
-            eachView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-        }*/
         for (EditText eachView : textViewList) {
             eachView.setOnClickListener(unused -> viewClicked(eachView));
         }
@@ -191,6 +160,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This function pops out and alert dialog whenever the user tries to manually override colors.
+     * @param view the position that the user is clicking
+     */
     private void viewClicked(EditText view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -248,6 +221,13 @@ public class MainActivity extends AppCompatActivity {
 
         builder.show();
     }
+
+    /**
+     * This function adds the user override to the array for final output.
+     * @param whichSide the surface that the user is manipulating.
+     * @param whichPos position of char to change
+     * @param userInput target char.
+     */
     private void addUserInputToArray(char whichSide,int whichPos, char userInput) {
         switch (whichSide) {
             case 'U':
@@ -306,6 +286,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    /**
+     * This function determines if the user is entering a bad input when overriding color.
+     * @param view position that user is writing into.
+     */
     private void inValidEntry(EditText view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String viewId = view.getResources().getResourceEntryName(view.getId());
@@ -358,6 +343,7 @@ public class MainActivity extends AppCompatActivity {
 
         builder.show();
     }
+
     private void unChangeablePiece(EditText view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String viewId = view.getResources().getResourceEntryName(view.getId());
@@ -372,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
     /**
      * This function is called when "solving is clicked"
      * Pops out an alert dialog that shows the result.
@@ -385,19 +372,7 @@ public class MainActivity extends AppCompatActivity {
                 .inflate(R.layout.chunk_solution, null, false);
         TextView solution = solutionDialog.findViewById(R.id.algorithm);
 
-        /* This shit is slow af, using different testing algorithm for now
-        // !TODO remove this after color recognizing is done.
-        // Testing rubik faces. Generated by "F U' F2 D' B U R' F' L D' R' U' L U B' D2 R' F U2 D2"
-        // should return FBLLURRFBUUFBRFDDFUULLFRDDLRFBLDRFBLUUBFLBDDBUURRBLDDR after conversion.
-        u = new char[]{'g', 'b', 'o', 'o', 'w', 'r', 'r', 'g', 'b'};
-        f = new char[]{'w', 'w', 'o', 'o', 'g', 'r', 'y', 'y', 'o'};
-        d = new char[]{'r', 'g', 'b', 'o', 'y', 'r', 'g', 'b', 'o'};
-        l = new char[]{'w', 'w', 'b', 'g', 'o', 'b', 'y', 'y', 'b'};
-        r = new char[]{'w', 'w', 'g', 'b', 'r', 'g', 'y', 'y', 'g'};
-        b = new char[]{'w', 'w', 'r', 'r', 'b', 'o', 'y', 'y', 'r'};
-
         // Convert traditional RGB chars to to UBL definition used by min2phase*/
-        initilizeCenterPiece();
         String rgbCube = new String(u) + new String(r) + new String(f) + new String(d) + new String(l) + new String(b);
         Log.d("cube before switching: ", rgbCube);
         rgbCube = rgbCube.replace(u[4], 'U');
@@ -408,15 +383,14 @@ public class MainActivity extends AppCompatActivity {
         rgbCube = rgbCube.replace(b[4], 'B');
         Log.d("Cube after switching: ", rgbCube);
 
-
-        //String rgbCube = "DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL";
-        //String rgbCube = Tools.randomCube();
-        //Test: solution.setText("F D F' U R' L' F D' U R D' F' D2 R U2");
-        //Test: Log.d("Conversion from min2phase package is: ", Tools.fromScramble("F U' F2 D' B U R' F' L D' R' U' L U B' D2 R' F U2 D2"));
         //Use min2phase to search for solution.
         Search.init();
         String result = new Search().solution(rgbCube, 21, 100000000, 0, 0);
-        solution.setText(result);
+        if(result.contains("Error")) {
+            solution.setText("Failed to find solutions, please check that all colors are correct");
+        } else {
+            solution.setText(result);
+        }
         Log.d("Result", result);
 
         // First hard-code URL-base for final animation.
@@ -448,7 +422,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Open a webpage if user want to see animation.
                         // Currently using web browser. !TODO We could update it with an curl maybe?
-                        // Uri webpage = Uri.parse("https://alg.cubing.net/?setup=U2_R-_D2_F_D_R-_U-_D_F-_L_R_U-_F_D-_F-%0A&alg=F_D_F-_U_R-_L-_F_D-_U_R_D-_F-_D2_R_U2");
                         Log.d("URL", url);
                         Uri webpage = Uri.parse(url);
                         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -466,6 +439,9 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    /**
+     * Called when "clear" is clicked. Re-initiate the views.
+     */
     private void clearInput() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setTitle("By clicking YES, you will restart the solver.");
@@ -530,12 +506,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 Log.d("Bad input from image onclickListener", Character.toString(position));
         }
-
-        /*
-        Arrays.fill(temp, 't');
-        Log.d("u is", Arrays.toString(u));
-        Log.d("d is", Arrays.toString(d));
-        */
         takePic();
     }
 
@@ -545,6 +515,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void takePic() {
         System.out.println("Arrived here at takePic");
+        //Use a permission control plug in when starting camera.
+        //Avoid app crashing when permission is not given.
         AndPermission.with(this).runtime()
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
                 .onGranted(unused -> {
@@ -554,7 +526,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             photoFile = createImageFile();
                         } catch (IOException ex) {
-                            Log.d("fuck ", ex.getMessage());
+                            Log.d("f**k", ex.getMessage());
                         }
                         if (photoFile != null) {
                             Uri photoURI = FileProvider.getUriForFile(this,
@@ -657,52 +629,27 @@ public class MainActivity extends AppCompatActivity {
         return data;
     }
 
+    /*
+    End of wheel functions.
+     */
 
+
+    /**
+     * This function calculates the color of each image.
+     */
     private synchronized void getColor() {
         Bitmap source = bitmapMap.get(centerPosition);
         int width = source.getWidth();
         int height = source.getHeight();
         int p = 0;
-        /*
-        for (int i = 0; i < 9; i++) {
-            switch (i) {
-                case 0:
-                    p = bitmap.getPixel(width / 6, height / 6);
-                    break;
-                case 1:
-                    p = bitmap.getPixel(width / 2, height / 6);
-                    break;
-                case 2:
-                    p = bitmap.getPixel(width * 5 / 6, height / 6);
-                    break;
-                case 3:
-                    p = bitmap.getPixel(width / 6, height / 2);
-                    break;
-                case 4:
-                    p = bitmap.getPixel(width / 2, height / 2);
-                    break;
-                case 5:
-                    p = bitmap.getPixel(width * 5 / 6, height / 2);
-                    break;
-                case 6:
-                    p = bitmap.getPixel(width / 6, height * 5 / 6);
-                    break;
-                case 7:
-                    p = bitmap.getPixel(width / 2, height * 5 / 6);
-                    break;
-                case 8:
-                    p = bitmap.getPixel(width * 5 / 6, height * 5 / 6);
-                    break;
-            }
-            System.out.println(centerPosition * 9 + i);
-            if (textViewList.get(centerPosition * 9 + i) != null) {
-                textViewList.get(centerPosition * 9 + i).setText(new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor());
-                temp[i] = new Pixel(Color.red(p), Color.green(p), Color.blue(p)).getColor().charAt(0);
-            }
-        }
-        */
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
+                //Skip the centerpiece.
+                if (i == 1 && j == 1) {
+                    p++;
+                    continue;
+                }
+                //Cut the bitmap and get color.
                 Bitmap subBitmap = Bitmap.createBitmap(source,
                         (width/3) * j,
                         (height/3) * i,
@@ -712,9 +659,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("color debugging ", "position " + i + "and " + j);
                 Log.d("color debugging", "location is " + (width/3) * j + " + " + (height/3) * i);
                 Log.d("color debugging", "HSV values " + Arrays.toString(avgRGB));
-                String color = ColorProcess.getColorName(avgRGB);
-                textViewList.get(centerPosition * 9 + p).setText(color);
-                temp[p] = color.charAt(1);
+                char color = ColorProcess.getColorName(avgRGB);
+                textViewList.get(centerPosition * 9 + p).setText(Character.toString(color));
+                temp[p] = color;
                 p++;
             }
         }
@@ -958,11 +905,11 @@ public class MainActivity extends AppCompatActivity {
         textViewList.add(d9);
     }
     private void initilizeCenterPiece() {
-        u[5] = 'w';
-        l[5] = 'o';
-        f[5] = 'g';
-        r[5] = 'r';
-        b[5] = 'b';
-        d[5] = 'y';
+        u[4] = 'w';
+        l[4] = 'o';
+        f[4] = 'g';
+        r[4] = 'r';
+        b[4] = 'b';
+        d[4] = 'y';
     }
 }
