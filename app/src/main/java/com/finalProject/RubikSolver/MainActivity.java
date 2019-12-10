@@ -188,28 +188,33 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                char userInput = input.getText().toString().charAt(0);
-                if (userInput == 'g' || userInput == 'G') {
-                    view.setText("g");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'w' || userInput == 'W') {
-                    view.setText("w");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'o' || userInput == 'O'){
-                    view.setText("o");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'r' || userInput == 'R') {
-                    view.setText("r");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'y' || userInput == 'Y') {
-                    view.setText("y");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'b'  || userInput == 'B') {
-                    view.setText("b");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else {
+                try {
+                    char userInput = input.getText().toString().charAt(0);
+                    if (userInput == 'g' || userInput == 'G') {
+                        view.setText("g");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'w' || userInput == 'W') {
+                        view.setText("w");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'o' || userInput == 'O'){
+                        view.setText("o");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'r' || userInput == 'R') {
+                        view.setText("r");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'y' || userInput == 'Y') {
+                        view.setText("y");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'b'  || userInput == 'B') {
+                        view.setText("b");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else {
+                        inValidEntry(view);
+                    }
+                } catch (Exception e) {
                     inValidEntry(view);
                 }
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -310,26 +315,30 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                char userInput = input.getText().toString().charAt(0);
-                if (userInput == 'g' || userInput == 'G') {
-                    view.setText("g");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'w' || userInput == 'W') {
-                    view.setText("w");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'o' || userInput == 'O'){
-                    view.setText("o");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'r' || userInput == 'R') {
-                    view.setText("r");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'y' || userInput == 'Y') {
-                    view.setText("y");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else if (userInput == 'b'  || userInput == 'B') {
-                    view.setText("b");
-                    addUserInputToArray(whichSide, whichPos, userInput);
-                } else {
+                try {
+                    char userInput = input.getText().toString().charAt(0);
+                    if (userInput == 'g' || userInput == 'G') {
+                        view.setText("g");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'w' || userInput == 'W') {
+                        view.setText("w");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'o' || userInput == 'O'){
+                        view.setText("o");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'r' || userInput == 'R') {
+                        view.setText("r");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'y' || userInput == 'Y') {
+                        view.setText("y");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else if (userInput == 'b'  || userInput == 'B') {
+                        view.setText("b");
+                        addUserInputToArray(whichSide, whichPos, userInput);
+                    } else {
+                        inValidEntry(view);
+                    }
+                } catch (Exception e) {
                     inValidEntry(view);
                 }
             }
